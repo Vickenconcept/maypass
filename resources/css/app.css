@@ -12,11 +12,14 @@
     @apply block text-sm font-medium leading-6 ;
 }
 
+.btn-basic {
+    @apply bg-[#25a0db] text-white px-5 py-2 block w-full text-sm whitespace-nowrap transition duration-300 ease-in-out rounded-lg  hover:bg-white hover:text-[#25a0db] border-2 border-[#25a0db] hover:shadow-md;
+}
 .btn-primary {
-    @apply flex w-full justify-center rounded-md bg-purple-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-purple-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-600;
+    @apply bg-[#25a0db] text-white px-5 py-2 text-sm whitespace-nowrap transition duration-300 ease-in-out rounded-lg  hover:bg-white hover:text-[#25a0db] border-2 border-[#25a0db] hover:shadow-md;
 }
 .btn-primary2 {
-    @apply flex w-full justify-center rounded-full bg-gradient-to-r from-violet-500 to-fuchsia-500  px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gradient-to-r hover:from-violet-600 hover:to-fuchsia-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-600;
+    @apply border-2 border-[#25a0db] hover:bg-[#25a0db] hover:text-white focus:bg-[#25a0db] text-[#25a0db] rounded-lg px-5 py-2 text-sm whitespace-nowrap transition duration-300 ease-in-out hover:shadow-md;
 }
 .card-animate {
     @apply transition duration-300 ease-linear;

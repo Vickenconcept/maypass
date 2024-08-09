@@ -11,14 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pins', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
-            $table->foreignId('template_id');
-            $table->string('title')->nullable();
-            $table->text('description')->nullable();
-            $table->text('image_path')->nullable();
-            $table->text('url')->nullable();
+            $table->string('name');
+            $table->text('description');
             $table->timestamps();
         });
     }
@@ -28,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pins');
+        Schema::dropIfExists('categories');
     }
 };

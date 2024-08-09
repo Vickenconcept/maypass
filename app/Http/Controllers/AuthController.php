@@ -8,49 +8,50 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateUserRequest;
+use App\Events\UserCreated;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Mail;
+use Spatie\Permission\Models\Role;
 
 class AuthController extends Controller
 {
 
     public function showRegistrationForm(Request $request)
     {
-        $referralToken = $request->query('ref');
+        $roles = Role::where('name', '!=', 'super-admin')->get();
 
-        if ($request->has('ref')) {
-            session(['referrer' => $request->query('ref')]);
-        }
-        return view('auth.register');
+        return view('admin.register', compact('roles'));
     }
     public function register(Request $request)
     {
-        $referrer = User::whereEmail(session()->pull('referrer'))->first();
 
         try {
             $data = $request->validate([
                 'name' => 'required|string',
                 'email' => 'required|email|unique:users',
-                'password' => 'required|confirmed',
-                'role' => 'sometimes',
-                'referrer_id' => 'sometimes'
+                'password' => 'required',
+                // 'role' => 'sometimes',
             ]);
             
-            $data['role'] = 'user';
-            $data['referrer_id'] = $referrer ? $referrer->id : null;
-
-            // dd($request->all());
+            
             $user = User::create($data);
+
+            $role = intval($request->role );
+
+            $user->assignRole($role);
+            Mail::to($user->email)->send(new \App\Mail\UserCreatedMail($user->name, $data['password']));
+
+            // event(new UserCreated($user));
+
         } catch (\Illuminate\Database\QueryException $e) {
             if ($e->getCode() == 23000) {
                 return redirect()->back()->withInput()->withErrors(['error' => 'A duplicate entry error occurred. Please try again.']);
             }
-        
         }
 
-        // event(new Registered($user));
 
-    
-        // auth()->logout();
+
+
         return $request->wantsJson()
             ? Response::api(['data' => $user])
             : to_route('login');

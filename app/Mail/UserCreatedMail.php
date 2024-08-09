@@ -9,16 +9,19 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 
 class UserCreatedMail extends Mailable
 {
     use Queueable, SerializesModels;
-  
-    public $user;
 
-    public function __construct(User $user)
+    public $name;
+    public $password;
+
+    public function __construct( $name, $password)
     {
-        $this->user = $user;
+        $this->name = $name;
+        $this->password = $password;
     }
 
     // public function build()
@@ -40,13 +43,16 @@ class UserCreatedMail extends Mailable
     /**
      * Get the message content definition.
      */
-    
+
 
     public function content(): Content
     {
         return new Content(
             view: 'emails.user_created',
-            with: ['user' => $this->user],
+            with: [
+                'user' => $this->name,
+                'password' => $this->password,
+            ],
         );
     }
 

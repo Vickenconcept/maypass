@@ -9,8 +9,13 @@
 </head>
 
 <body>
-    <h1>Welcome, {{ $user->name }}!</h1>
+    <h1>Welcome, {{ $name }}!</h1>
     <p>Thank you for registering with us.</p>
+    <br>
+    <br>
+    <p>Your password is</p>
+    <p><b>{{ $password }}</b></p>
+
 </body>
 
 </html>

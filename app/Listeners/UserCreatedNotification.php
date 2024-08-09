@@ -17,14 +17,13 @@ class UserCreatedNotification
     {
         //
     }
-
+    
     /**
      * Handle the event.
      */
-
+    
     public function handle(UserCreated $event)
     {
-        // Send email logic
-        Mail::to($event->user->email)->send(new \App\Mail\UserCreatedMail($event->user));
+        // Mail::to($event->user->email)->send(new \App\Mail\UserCreatedMail($event->user));
     }
 }
