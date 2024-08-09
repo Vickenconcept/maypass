@@ -1,10 +1,6 @@
 import './bootstrap';
 
 import 'flowbite';
-<<<<<<< HEAD
-=======
-
-
 
 import notification from './notification';
 
@@ -21,4 +17,3 @@ Alpine.data('notification', notification);
 window.Alpine = Alpine;
 
 Alpine.start();
->>>>>>> 3090c57 (update)

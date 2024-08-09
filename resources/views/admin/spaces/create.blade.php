@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="container mx-auto px-4 py-8">
+    <div class="container mx-auto px-4 py-8 md:w-[60%]">
         <h1 class="text-2xl font-bold mb-4">Create New Space</h1>
 
         <div class="bg-white rounded-lg shadow-md p-6">
@@ -44,7 +44,7 @@
                 </div>
 
                 <button type="submit"
-                    class="w-full bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Create Space</button>
+                    class="btn-basic">Create Space</button>
             </form>
         </div>
     </div>

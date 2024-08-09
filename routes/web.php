@@ -13,7 +13,7 @@ use App\Models\Space;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    $spaces =  Space::where('is_available', true)->get();
+    $spaces =  Space::where('is_available', true)->latest()->get();
     return view('home', compact('spaces'));
 })->name('home');
 
@@ -26,8 +26,6 @@ Route::middleware('guest')->group(function () {
     Route::post('/reset-password', [PasswordResetController::class, 'update'])->name('password.update');
 
     Route::controller(AuthController::class)->group(function () {
-        // Route::get('register', 'showRegistrationForm')->name('register');
-        // Route::post('auth/register', 'register')->name('auth.register');
         Route::post('auth/login', 'login')->name('auth.login');
     });
 });

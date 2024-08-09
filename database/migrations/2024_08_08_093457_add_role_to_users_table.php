@@ -11,20 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-<<<<<<< HEAD:database/migrations/2024_08_06_110325_create_pins_table.php
-        Schema::create('pins', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id');
-            $table->foreignId('template_id');
-            $table->string('title')->nullable();
-            $table->text('description')->nullable();
-            $table->text('image_path')->nullable();
-            $table->text('url')->nullable();
-            $table->timestamps();
-=======
+
         Schema::table('users', function (Blueprint $table) {
             $table->foreignId('role_id')->nullable()->constrained()->onDelete('set null');
->>>>>>> 3090c57 (update):database/migrations/2024_08_08_093457_add_role_to_users_table.php
         });
     }
 

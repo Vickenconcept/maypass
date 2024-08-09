@@ -14,19 +14,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-<<<<<<< HEAD
-            TemplateSeeder::class,
 
-            // other seeders...
-        ]);
-
-        // User::factory(10)->create();
-
-        // User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-=======
             RoleAndPermissionSeeder::class,
         ]);
 
@@ -44,6 +32,5 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $adminUser->assignRole('admin');
->>>>>>> 3090c57 (update)
     }
 }

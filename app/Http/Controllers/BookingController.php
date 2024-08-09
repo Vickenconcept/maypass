@@ -14,11 +14,6 @@ class BookingController extends Controller
         return view('admin.bookings.index', compact('bookings'));
     }
 
-
-    // public function create(Space $space)
-    // {
-    //     return view('bookings.create', compact('space'));
-    // }
     public function book(Space $space)
     {
         return view('bookings.create', compact('space'));
@@ -26,39 +21,35 @@ class BookingController extends Controller
 
     public function store(Request $request)
     {
+
         try {
-            // Validate the incoming request
             $validated = $request->validate([
                 'space_id' => 'required|exists:spaces,id',
-                'start_date' => 'required|date',
-                'end_date' => 'required|date|after_or_equal:start_date',
+                'days_count' => 'required',
+                // 'end_date' => 'required|date|after_or_equal:start_date',
             ]);
 
-            // Assign the authenticated user's ID to the booking
             $validated['user_id'] = auth()->id();
 
-            // Find the space by its ID
             $space = Space::find($validated['space_id']);
 
-            // Check if the space is available for booking
             if ($space->is_available) {
-                // Create the booking
                 Booking::create($validated);
 
-                // Mark the space as unavailable
                 $space->is_available = false;
                 $space->update();
 
-                // Redirect to the bookings index with success message
-                return redirect()->route('bookings.index')->with('success', 'Booking created successfully.');
+                // return redirect()->route('bookings.index')->with('success', 'Booking created successfully.');
+
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Payment successfully processed.',
+                    'message' => $request->all(),
+                ]);
             } else {
-                // If the space is not available, redirect back with an error message
                 return back()->with('error', 'Space is not available.');
             }
         } catch (\Exception $e) {
-            // Catch any exceptions and handle them accordingly
-
-            // return back()->with('error', 'An error occurred while creating the booking. Please try again.');
             return back()->with('error', $e->getMessage());
         }
     }

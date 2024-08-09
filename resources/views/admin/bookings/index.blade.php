@@ -1,32 +1,46 @@
 <x-app-layout>
     <div class="container mx-auto px-4 py-8">
         <h1 class="text-2xl font-bold mb-4">Manage Bookings</h1>
-    
-        <div class="bg-white rounded-lg shadow-md overflow-hidden">
-            <table class="min-w-full bg-white">
-                <thead>
+
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
                     <tr>
-                        <th class="py-2 px-4 border-b">Space</th>
-                        <th class="py-2 px-4 border-b">User</th>
-                        <th class="py-2 px-4 border-b">Days</th>
-                        <th class="py-2 px-4 border-b">Total Amount</th>
-                        <th class="py-2 px-4 border-b">Booking Date</th>
-                        <th class="py-2 px-4 border-b">Actions</th>
+                        <th scope="col" class="px-6 py-3">Space</th>
+                        <th scope="col" class="px-6 py-3">User</th>
+                        <th scope="col" class="px-6 py-3">Days</th>
+                        <th scope="col" class="px-6 py-3">Total Amount</th>
+                        <th scope="col" class="px-6 py-3">Booking Date</th>
+                        <th scope="col" class="pr-6 pl-1.5 py-4 text-center">
+
+                        </th>
+
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($bookings as $booking)
-                    <tr>
-                        <td class="py-2 px-4 border-b">{{ $booking->space->name }}</td>
-                        <td class="py-2 px-4 border-b">{{ $booking->user->name }}</td>
-                        <td class="py-2 px-4 border-b">{{ $booking->days }}</td>
-                        <td class="py-2 px-4 border-b">${{ $booking->total_amount }}</td>
-                        <td class="py-2 px-4 border-b">{{ $booking->created_at->format('d M Y') }}</td>
-                        <td class="py-2 px-4 border-b">
-                            <a href="{{ route('bookings.show', $booking->id) }}" class="text-blue-500 hover:text-blue-700">View</a>
-                        </td>
-                    </tr>
-                    @endforeach
+                    @forelse ($bookings as $booking)
+                        <tr class="bg-white border-b  hover:bg-gray-50 ">
+
+                            <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap capitalize">
+                                {{ $booking->space->name }}</td>
+                            <td class="px-6 py-4 capitalize">{{ $booking->user->name }}</td>
+                            <td class="px-6 py-4 capitalize">{{ $booking->days }}</td>
+                            <td class="px-6 py-4 capitalize">${{ $booking->total_amount }}</td>
+                            <td class="px-6 py-4 capitalize">{{ $booking->created_at->format('d M Y') }}</td>
+                            <td class="px-6 py-4 capitalize">
+                                <a href="{{ route('bookings.show', $booking->id) }}"
+                                    class="text-blue-500 hover:text-blue-700">View</a>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="6"
+                                class="bg-white border-b  hover:bg-gray-50 text-center p-8 font-bold text-xl text-gray-400">
+                                No data yet
+                            </td>
+                        </tr>
+                    @endforelse
+
                 </tbody>
             </table>
         </div>
