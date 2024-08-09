@@ -54,7 +54,7 @@ class AuthController extends Controller
 
         return $request->wantsJson()
             ? Response::api(['data' => $user])
-            : to_route('login');
+            : back()->with('success','User Created Successfully');
     }
 
     public function login(CreateUserRequest $request)

@@ -22,7 +22,7 @@
                             <label for="days_count" class="mb-2 text-sm font-medium text-gray-900 sr-only ">
                                 No. od days</label>
                             <div class="relative w-full">
-                                <input type="number" id="days_count"
+                                <input type="number" id="days_count" name="days_count"
                                     class="block p-2.5 w-full z-20 text- border-2 border-gray-200 text-gray-900  rounded-lg  border-s-2  focus:ring-[#25a0db] focus:border-[#25a0db] "
                                     placeholder="No. of days" value="10" required readonly />
                             </div>
@@ -107,69 +107,74 @@
 
     <script src="https://js.paystack.co/v2/inline.js"></script>
     <script>
-        function payWithPaystack(e) {
-            e.preventDefault();
-
-            let handler = PaystackPop.setup({
-                key: 'pk_test_a683d1e021670d61207a3fb1241bf4d23c92ca40', // Replace with your public key
-                email: document.getElementById("email-address").value,
-                amount: document.getElementById("amount").value * 100,
-                ref: '' + Math.floor((Math.random() * 1000000000) + 1), // generates a pseudo-unique reference
-                onClose: function() {
-                    alert('Window closed.');
-                },
-                callback: function(response) {
-                    let message = 'Payment complete! Reference: ' + response.reference;
-                    // console.log('this is it' + message);
-
-
-                    let data = {
-                        reference: response.reference,
-                        email: document.getElementById("email-address").value,
-                        amount: document.getElementById("amount").value,
-                        space_id: @js($space->id),
-                        _token: '{{ csrf_token() }}'
-                    };
-
-                    // Submit the data to your server route
-                    let creatRoute = "{{ route('bookings.store') }}";
-                    fetch(creatRoute, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                            },
-                            body: JSON.stringify(data) // Send the data as JSON
-                        })
-                        .then(response => {
-                            if (response.ok) {
-                                return response.json();
-
-                            } else {
-                                throw new Error('Payment submission failed.');
-                            }
-                        })
-                        .then(data => {
-                            if (data.success) {
-                                console.log('Server response:', data.message);
-
-                                alert(data.message); // Display the success message to the user
-                                setInterval(() => {
-                                    location.reload();
-                                }, 1000);
-                                // Optionally redirect or update the UI
-                            } else {
-                                console.error('Server error:', data.message);
-                                alert('An error occurred: ' + data.message);
-                            }
-                        })
-                        .catch(error => {
-                            console.error('Error:', error);
-                        });
-                }
-            });
-
-            handler.openIframe();
+        if (currencyInput.value !== null) {
+            
+            function payWithPaystack(e) {
+                e.preventDefault();
+    
+                let handler = PaystackPop.setup({
+                    key: 'pk_test_a683d1e021670d61207a3fb1241bf4d23c92ca40', // Replace with your public key
+                    email: document.getElementById("email-address").value,
+                    amount: document.getElementById("amount").value * 100,
+                    ref: '' + Math.floor((Math.random() * 1000000000) + 1), // generates a pseudo-unique reference
+                    onClose: function() {
+                        alert('Window closed.');
+                    },
+                    callback: function(response) {
+                        let message = 'Payment complete! Reference: ' + response.reference;
+                        // console.log('this is it' + message);
+    
+    
+                        let data = {
+                            reference: response.reference,
+                            email: document.getElementById("email-address").value,
+                            total_amount: document.getElementById("amount").value,
+                            space_id: @js($space->id),
+                            days_count: currencyInput.value,
+                            _token: '{{ csrf_token() }}'
+                        };
+    
+                        // Submit the data to your server route
+                        let creatRoute = "{{ route('bookings.store') }}";
+                        fetch(creatRoute, {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                },
+                                body: JSON.stringify(data) // Send the data as JSON
+                            })
+                            .then(response => {
+                                if (response.ok) {
+                                    return response.json();
+    
+                                } else {
+                                    throw new Error('Payment submission failed.');
+                                }
+                            })
+                            .then(data => {
+                                if (data.success) {
+                                    console.log('Server response:', data.message);
+    
+                                    alert(data.message); // Display the success message to the user
+                                    setInterval(() => {
+                                        // location.reload();
+                                    }, 1000);
+                                } else {
+                                    console.error('Server error:', data.message);
+                                    setInterval(() => {
+                                        location.reload();
+                                    }, 1000);
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                            });
+                    }
+                });
+    
+                handler.openIframe();
+            }
         }
     </script>
 

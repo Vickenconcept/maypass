@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Booking;
 use App\Models\Space;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class BookingController extends Controller
 {
+ 
+
     public function index()
     {
         $bookings = Booking::with(['user', 'space'])->get();
@@ -26,38 +29,49 @@ class BookingController extends Controller
             $validated = $request->validate([
                 'space_id' => 'required|exists:spaces,id',
                 'days_count' => 'required',
-                // 'end_date' => 'required|date|after_or_equal:start_date',
+                'total_amount' => 'required',
             ]);
 
             $validated['user_id'] = auth()->id();
 
-            $space = Space::find($validated['space_id']);
+            $currentDate = Carbon::now();
 
+            $futureDate = $currentDate->addDays(intval($validated['days_count']));
+            
+
+            $space = Space::find($validated['space_id']);
+            
+          
             if ($space->is_available) {
                 Booking::create($validated);
-
+                
                 $space->is_available = false;
+                $space->date_to_activate = $futureDate->format('Y-m-d');
                 $space->update();
-
-                // return redirect()->route('bookings.index')->with('success', 'Booking created successfully.');
 
                 return response()->json([
                     'success' => true,
                     'message' => 'Payment successfully processed.',
-                    'message' => $request->all(),
                 ]);
             } else {
-                return back()->with('error', 'Space is not available.');
+                // return back()->with('error', 'Space is not available.');
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Space is not available.',
+                ]);
             }
         } catch (\Exception $e) {
-            return back()->with('error', $e->getMessage());
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage(),
+            ]);
         }
     }
 
 
     public function show(Booking $booking)
     {
-        return view('admin.bookings.show', compact('booking'));
+        return view('bookings.show', compact('booking'));
     }
 
     public function edit(Booking $booking)

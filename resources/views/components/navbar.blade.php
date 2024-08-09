@@ -69,6 +69,18 @@
                     </div>
                     <ul class="py-1" role="none">
                         <li>
+                           
+                                <a href="{{ route('roles.index') }}"
+                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Roles</a>
+
+                        </li>
+                        <li>
+                           
+                                <a href="{{ route('admin.users.index') }}"
+                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Users</a>
+
+                        </li>
+                        <li>
                             @if (auth()->check())
                                 <form action="{{ route('auth.logout') }}" method="POST">
                                     @csrf

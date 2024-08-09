@@ -1,9 +1,9 @@
 <x-app-layout>
     <div class="container mx-auto px-4 py-8">
-        <h1 class="text-2xl font-bold mb-4">Available Work Spaces</h1>
+        <h1 class="text-2xl font-bold mb-5">Available Work Spaces</h1>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            @foreach ($spaces as $space)
+            @forelse ($spaces as $space)
                 <div class="bg-white rounded-lg shadow-md hover:shadow-lg px-5 pt-5 pb-10">
                     <div
                         class="bg-gray-200 rounded-md overflow-hidden group h-[200px]  transition-all duration-700 relative">
@@ -29,7 +29,11 @@
                     <p class="text-gray-800 font-bold mt-2 mb-5">${{ $space->price_per_day }}/day</p>
                     <a href="{{ route('bookings.book', $space->id) }}" class=" btn-primary">Book Now</a>
                 </div>
-            @endforeach
+                @empty
+                <div class="md:col-span-2 lg:col-span-3 bg-white rounded-lg shadow px-5 pt-5 pb-10  w-[50%] mx-auto">
+                    <img src="{{ asset('images/undraw_designer_re_5v95.svg') }}" alt="">
+                </div>
+            @endforelse
         </div>
 
 

@@ -31,7 +31,7 @@
 </head>
 
 <body class="h-full">
-    <div id="ap" class="min-h-screen bg-purple-50 text-gray-700" x-data="{ openHelp: false }">
+    <div id="ap" class="min-h-screen bg-gray-50 text-gray-800" x-data="{ openHelp: false }">
 
         <x-navbar />
         <x-notification />

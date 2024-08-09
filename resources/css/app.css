@@ -19,7 +19,7 @@
     @apply bg-[#25a0db] text-white px-5 py-2 text-sm whitespace-nowrap transition duration-300 ease-in-out rounded-lg  hover:bg-white hover:text-[#25a0db] border-2 border-[#25a0db] hover:shadow-md;
 }
 .btn-primary2 {
-    @apply border-2 border-[#25a0db] hover:bg-[#25a0db] hover:text-white focus:bg-[#25a0db] text-[#25a0db] rounded-lg px-5 py-2 text-sm whitespace-nowrap transition duration-300 ease-in-out hover:shadow-md;
+    @apply border-2 border-[#25a0db] bg-white hover:bg-[#25a0db] hover:text-white focus:bg-[#25a0db] text-[#25a0db] rounded-lg px-5 py-2 text-sm whitespace-nowrap transition duration-300 ease-in-out hover:shadow-md;
 }
 .card-animate {
     @apply transition duration-300 ease-linear;

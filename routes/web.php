@@ -43,19 +43,8 @@ Route::middleware(['auth'])->group(function () {
 
 Route::middleware(['auth', 'role:super-admin'])->group(function () {
 
-    Route::controller(UserController::class)->group(function () {
-        Route::get('/admin/users', 'index')->name('admin.users.index');
-        Route::get('/admin/users/{user}/edit', 'edit')->name('admin.users.edit');
-        Route::put('/admin/users/{user}', 'update')->name('admin.users.update');
-    });
-    Route::resource('spaces', SpaceController::class);
-
-    Route::controller(RoleController::class)->group(function () {
-        Route::get('/roles',  'index')->name('roles.index');
-        Route::get('/roles/create', 'create')->name('roles.create');
-        Route::post('roles', 'store')->name('roles.store');
-        Route::post('/roles/{role}/permissions', 'updatePermissions')->name('roles.permissions.update');
-    });
+    Route::post('/roles/{role}/permissions', [RoleController::class, 'updatePermissions'])->name('roles.permissions.update');
+    Route::resource('roles', RoleController::class);
 
     Route::controller(AuthController::class)->group(function () {
         Route::get('register', 'showRegistrationForm')->name('register');
@@ -64,11 +53,56 @@ Route::middleware(['auth', 'role:super-admin'])->group(function () {
 });
 
 
-Route::middleware(['auth', 'role:admin|super-admin'])->group(function () {
-    Route::resource('categories', CategoryController::class);
+
+Route::middleware(['auth', 'permission:create-space'])->group(function () {
+    Route::resource('spaces', SpaceController::class)->only(['create', 'store']);
+});
+
+Route::middleware(['auth', 'permission:view-space'])->group(function () {
+    Route::resource('spaces', SpaceController::class)->only(['index', 'show']);
+});
+
+Route::middleware(['auth', 'permission:update-space'])->group(function () {
+    Route::resource('spaces', SpaceController::class)->only(['edit', 'update']);
+});
+
+Route::middleware(['auth', 'permission:delete-space'])->group(function () {
+    Route::resource('spaces', SpaceController::class)->only(['destroy']);
+});
+
+Route::middleware(['auth', 'permission:create-category'])->group(function () {
+    Route::resource('categories', CategoryController::class)->only(['create', 'store']);
+});
+
+Route::middleware(['auth', 'permission:view-category'])->group(function () {
+    Route::resource('categories', CategoryController::class)->only(['index', 'show']);
+});
+
+Route::middleware(['auth', 'permission:update-category'])->group(function () {
+    Route::resource('categories', CategoryController::class)->only(['edit', 'update']);
+});
+
+Route::middleware(['auth', 'permission:delete-category'])->group(function () {
+    Route::resource('categories', CategoryController::class)->only(['destroy']);
 });
 
 Route::middleware(['auth', 'permission:view-bookings'])->group(function () {
+    Route::resource('bookings', BookingController::class)->only(['index', 'show']);
     Route::get('/bookings/book/{space}', [BookingController::class, 'book'])->name('bookings.book');
-    Route::resource('bookings', BookingController::class);
+});
+
+Route::middleware(['auth', 'permission:manage-bookings'])->group(function () {
+    Route::resource('bookings', BookingController::class)->only(['create', 'store', 'edit', 'update', 'destroy']);
+});
+
+Route::middleware(['auth', 'permission:view-payments'])->group(function () {
+    // Add routes related to viewing payments here
+});
+
+Route::middleware(['auth', 'permission:manage-users'])->group(function () {
+    Route::controller(UserController::class)->group(function () {
+        Route::get('/admin/users', 'index')->name('admin.users.index');
+        Route::get('/admin/users/{user}/edit', 'edit')->name('admin.users.edit');
+        Route::put('/admin/users/{user}', 'update')->name('admin.users.update');
+    });
 });
