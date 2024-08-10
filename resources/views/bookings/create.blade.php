@@ -23,7 +23,7 @@
                                 No. od days</label>
                             <div class="relative w-full">
                                 <input type="number" id="days_count" name="days_count"
-                                    class="block p-2.5 w-full z-20 text- border-2 border-gray-200 text-gray-900  rounded-lg  border-s-2  focus:ring-[#25a0db] focus:border-[#25a0db] "
+                                    class="form-control2 "
                                     placeholder="No. of days" value="10" required readonly />
                             </div>
                         </div>
@@ -44,7 +44,7 @@
                         <label class="font-medium text-sm mb-2 ml-1">Email</label>
                         <div>
                             <input
-                                class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:ring-[#25a0db] focus:border-[#25a0db] transition-colors"
+                                class="form-control2"
                                 placeholder="Jexample.me@gmail.com" type="email" id="email-address" required />
                         </div>
                     </div>
@@ -68,8 +68,13 @@
             </div>
             <div class="md:col-span-1 bg-white rounded-lg shadow-md p-6">
                 <div class="h-[300px]">
-                    <img src="{{ asset('storage/' . $space->image) }}" alt="{{ $space->name }}"
-                        class="w-full h-48 object-cover rounded-lg border-2 border-[#25a0db]">
+                    @if ($space->image)
+                        <img src="{{ asset('storage/' . $space->image) }}" alt="{{ $space->name }}"
+                            class="w-full h-48 object-cover rounded-lg border-2 border-[#25a0db]">
+                    @else
+                        <img src="{{ asset('images/workspace.jpg') }}" alt="{{ $space->name }}"
+                            class="w-full h-48 object-cover rounded-lg border-2 border-[#25a0db]">
+                    @endif
                 </div>
             </div>
         </section>

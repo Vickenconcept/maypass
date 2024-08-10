@@ -1,11 +1,11 @@
 <x-app-layout>
-    <div class="flex flex-col min-h-full justify-center bg-blue-200">
-        <div class="   px-6 py-8 lg:px-8 bg-white rounded-3xl w-full md:w-[60%] lg:w-[40%] mx-auto">
+    <div class="flex flex-col min-h-full justify-center pt-10">
+        <div class="   px-6 py-8 lg:px-8 bg-white rounded-3xl w-full md:w-[60%] lg:w-[40%] mx-auto shadow-xl shadow-[#25a0db]">
             <div class="sm:mx-auto sm:w-full sm:max-w-sm">
                 <div class="flex justify-center space-x-1">
                     <i class="bx bx-bot text-[#25a0db] text-3xl"></i>
 
-                    <h1 class="text-[#25a0db] text-2xl"><b>Bot</b>Convert</h1>
+                    <h1 class="text-[#25a0db] text-2xl"><b>May</b>Pass</h1>
                 </div>
                 <h2 class=" text-center text-2xl font-bold leading-9 tracking-tight text-[#25a0db]">Create User</h2>
             </div>
@@ -77,7 +77,7 @@
                   
 
                     <div class="pt-2">
-                        <button type="submit" class="btn-basic  ">Register</button>
+                        <button type="submit" class="btn-basic ">Register</button>
                     </div>
                 </form>
 

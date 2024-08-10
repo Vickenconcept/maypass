@@ -6,7 +6,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PinController;
-
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SpaceController;
 use App\Http\Controllers\UserController;
@@ -50,7 +50,7 @@ Route::middleware(['auth'])->group(function () {
             $notification->markAsRead();
         }
 
-       return redirect()->back();
+        return redirect()->back();
     })->name('notifications.read_one');;
 
     Route::get('my-spaces', [UserSpaceController::class, 'index'])->name('my.space.index');
@@ -106,6 +106,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/bookings/book/{space}', [BookingController::class, 'book'])->name('bookings.book');
     Route::post('/booking/{id}/status', [BookingController::class, 'updateStatus'])->name('booking.updateStatus');
     Route::resource('bookings', BookingController::class);
+
+    Route::view('profile', 'profile')->name('profile');
+    Route::post('profile/name', [ProfileController::class, 'changeName'])->name('changeName');
+    Route::post('profile/password', [ProfileController::class, 'changePassword'])->name('changePassword');
 });
 
 // Route::middleware(['auth', 'permission:view-bookings'])->group(function () {

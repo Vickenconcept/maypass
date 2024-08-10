@@ -2,18 +2,43 @@
     <div class="container mx-auto px-4 py-8">
         <h1 class="text-2xl font-bold mb-4">Manage Bookings</h1>
 
+        <div class="grid md:grid-cols-2 ">
+            <div></div>
+            <form method="GET" action="{{ route('bookings.index') }}" class="mb-4">
+                <div class="flex space-x-4">
+                    <input type="text" name="search" placeholder="Search by name or reference"
+                        value="" class="form-control2">
+
+                    <select name="status" onchange="this.form.submit()" class="form-control2">
+                        <option value="all" {{ request('status') == 'all' ? 'selected' : '' }}>All</option>
+                        <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>
+                            Pending</option>
+                        <option value="canceled" {{ request('status') == 'canceled' ? 'selected' : '' }}>
+                            Failed</option>
+                        <option value="ended" {{ request('status') == 'ended' ? 'selected' : '' }}>
+                            Ended</option>
+                        <option value="confirmed"
+                            {{ request('status') == 'confirmed' ? 'selected' : '' }}>Confirmed</option>
+                    </select>
+                    <button type="submit" class="btn-primary">Search</button>
+
+                </div>
+            </form>
+        </div>
+
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 shadow-md sm:rounded-lg">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
                     <tr>
                         <th scope="col" class="px-6 py-3">Space</th>
                         <th scope="col" class="px-6 py-3">User</th>
+                        <th scope="col" class="px-6 py-3">Reference</th>
                         <th scope="col" class="px-6 py-3">Days</th>
                         <th scope="col" class="px-6 py-3">Total Amount</th>
                         <th scope="col" class="px-6 py-3">Booking Date</th>
-                        <th scope="col" class="px-6 py-3 text-center">Status</th>
-                        <th scope="col" class="pr-6 pl-1.5 py-4 text-center">
-
+                        <th scope="col" class="px-6 py-3 ">Status</th>
+                        <th scope="col" class="pr-6 pl-1.5 py-4 text-center bg-slate-200">
+                            Action
                         </th>
 
                     </tr>
@@ -25,15 +50,16 @@
                             <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap capitalize">
                                 {{ $booking->space->name }}</td>
                             <td class="px-6 py-4 capitalize">{{ $booking->user->name }}</td>
+                            <td class="px-6 py-4 capitalize font-semibold text-gray-800">{{ $booking->reference }}</td>
                             <td class="px-6 py-4 capitalize">{{ $booking->days_count }}</td>
                             <td class="px-6 py-4 capitalize">${{ $booking->total_amount }}</td>
                             <td class="px-6 py-4 capitalize">{{ $booking->created_at->format('d M Y') }}</td>
-                            <td class="px-6 py-4 capitalize flex items-center justify-between space-x-2"
+                            <td class="px-6 py-4 capitalize flex items-center  space-x-3 "
                                 id="booking-status-{{ $booking->id }}">
                                 @if ($booking->status == 'confirmed')
                                     <span
                                         class="border border-green-600 bg-green-100 text-green-600 px-4 py-1 rounded-full font-semibold text-xs ">
-                                        Completed</span>
+                                        Confirmed</span>
                                 @elseif($booking->status == 'canceled')
                                     <span
                                         class="border border-red-600 bg-red-100 text-red-600 px-4 py-1 rounded-full font-semibold text-xs ">
@@ -90,14 +116,14 @@
                                     Pending</button> --}}
 
                             </td>
-                            <td class="px-6 py-4 capitalize">
+                            <td class="px-6 py-4 capitalize bg-slate-100">
                                 <a href="{{ route('bookings.show', $booking->id) }}"
-                                    class="text-blue-500 hover:text-blue-700">View</a>
+                                    class="text-xl font-bold"><i class='bx bxs-show'></i></a>
                             </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6"
+                            <td colspan="8"
                                 class="bg-white border-b  hover:bg-gray-50 text-center p-8 font-bold text-xl text-gray-400">
                                 No data yet
                             </td>

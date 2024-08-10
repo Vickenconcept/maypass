@@ -2,10 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 .form-control {
-    @apply block w-full rounded-md border-2 border-gray-300   py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#25a0db] sm:text-sm sm:leading-6;
+    @apply bg-gray-50 border-2 border-[#25a0db] text-gray-900 text-sm rounded-2xl focus:ring-[#25a0db] focus:border-[#25a0db] block w-full p-2.5;
 }
+
 .form-control2 {
-    @apply block w-full rounded-md border-2 border-gray-300   py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#25a0db] sm:text-sm sm:leading-6;
+    @apply bg-gray-50 border-2 border-[#25a0db] text-gray-900 text-sm rounded-lg focus:ring-[#25a0db] focus:border-[#25a0db] block w-full p-2.5;
 }
 
 .input-label {

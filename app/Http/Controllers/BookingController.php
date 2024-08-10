@@ -15,9 +15,33 @@ class BookingController extends Controller
 {
 
 
-    public function index()
+    public function index(Request $request)
     {
-        $bookings = Booking::with(['user', 'space'])->paginate(10);
+
+        $query = Booking::with(['user', 'space']);
+
+        // Filter by search term (reference, space name, or user name)
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            $query->where(function ($query) use ($search) {
+                $query->where('reference', 'like', '%' . $search . '%')
+                    ->orWhereHas('space', function ($subQuery) use ($search) {
+                        $subQuery->where('name', 'like', '%' . $search . '%');
+                    })
+                    ->orWhereHas('user', function ($subQuery) use ($search) {
+                        $subQuery->where('name', 'like', '%' . $search . '%');
+                    });
+            });
+        }
+
+        // Filter by status
+        if ($request->has('status') && $request->input('status') !== 'all') {
+            $status = $request->input('status');
+            $query->where('status', $status);
+        }
+
+        $bookings = $query->paginate(10);
+
         return view('admin.bookings.index', compact('bookings'));
     }
 

@@ -8,9 +8,34 @@ use Illuminate\Http\Request;
 
 class SpaceController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $spaces = Space::with('category')->paginate(10);
+
+        $query = Space::with('category');
+
+        // Filter by search term (name or category name)
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            $query->where(function ($query) use ($search) {
+                $query->where('name', 'like', '%' . $search . '%')
+                    ->orWhereHas('category', function ($subQuery) use ($search) {
+                        $subQuery->where('name', 'like', '%' . $search . '%');
+                    });
+            });
+        }
+
+        // Filter by availability
+        if ($request->has('availability') && $request->input('availability') !== 'all') {
+            $availability = $request->input('availability');
+            if ($availability == 'available') {
+                $query->where('is_available', 1);
+            } elseif ($availability == 'non-available') {
+                $query->where('is_available', 0);
+            }
+        }
+
+
+        $spaces = $query->paginate(10);
         return view('admin.spaces.index', compact('spaces'));
     }
 
@@ -25,7 +50,7 @@ class SpaceController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'image' => 'nullable|image',
+            'image' => 'required|image',
             'price_per_day' => 'required|numeric',
             'category_id' => 'required|exists:categories,id',
         ]);
@@ -41,14 +66,14 @@ class SpaceController extends Controller
 
     public function show(Space $space)
     {
-        
+
         return view('admin.spaces.show', compact('space'));
     }
 
     public function edit(Space $space)
     {
         $categories = Category::latest()->get();
-        return view('admin.spaces.edit', compact('space','categories'));
+        return view('admin.spaces.edit', compact('space', 'categories'));
     }
 
     public function update(Request $request, Space $space)

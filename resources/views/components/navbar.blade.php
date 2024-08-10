@@ -1,8 +1,11 @@
+@php
+    $hasRole = auth()->user()->roles->isNotEmpty();
+@endphp
 <nav class=" border-gray-200 bg-[#25a0db]">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-4 px-10">
-        <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
+        <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
             <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Flowbite Logo" />
-            <span class="self-center text-2xl font-semibold whitespace-nowrap ">Flowbite</span>
+            <span class="self-center text-2xl font-semibold whitespace-nowrap  text-white">Maypasss</span>
         </a>
         <button data-collapse-toggle="navbar-default" type="button"
             class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm  rounded-lg md:hidden  focus:outline-none focus:ring-2  text-gray-400 hover:bg-gray-700 focus:ring-gray-600"
@@ -21,22 +24,26 @@
                     <a href="/" class="block py-2 px-3  text-white rounded md:bg-transparent  md:p-0  "
                         aria-current="page">Home</a>
                 </li>
+                @can('view-space')
                 <li>
                     <a href="{{ route('spaces.index') }}"
                         class="block py-2 px-3 rounded md:border-0 text-white md:hover:text-gray-300 md:p-0   hover:bg-gray-700 hover: md:hover:bg-transparent">Work
                         Spaces</a>
                 </li>
-                @can('create-category')
+                @endcan
+                @can('view-category')
                     <li>
                         <a href="{{ route('categories.index') }}"
                             class="block py-2 px-3 rounded md:border-0 text-white md:hover:text-gray-300 md:p-0   hover:bg-gray-700 hover: md:hover:bg-transparent">Categories</a>
                     </li>
                 @endcan
 
+                @can('view-bookings')
                 <li>
                     <a href="{{ route('bookings.index') }}"
                         class="block py-2 px-3 rounded md:border-0 text-white md:hover:text-gray-300 md:p-0   hover:bg-gray-700 hover: md:hover:bg-transparent">Bookings</a>
                 </li>
+                @endcan
                 @auth
 
                     <li class="flex item-center justify-center">
@@ -113,16 +120,16 @@
                     @endauth
                     <div class="flex items-center ms-3 space-x-4">
                         <button type="button"
-                            class="flex text-sm items-center hover:bg-gray-50 rounded-full focus:ring-4 focus:ring-gray-100 md:space-x-2"
+                            class="flex text-sm items-center group hover:bg-gray-50 rounded-full focus:ring-4 focus:ring-gray-100 md:space-x-2"
                             aria-expanded="false" data-dropdown-toggle="dropdown-user">
                             <span class="sr-only">Open user menu</span>
 
                             <img class="w-8 h-8 rounded-full"
                                 src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo">
                             @if (auth()->check())
-                                <p class="text-sm font-semibold hidden md:block">{{ auth()->user()->name }} </p>
+                                <p class="text-sm font-semibold hidden md:block text-white group-hover:text-gray-800">{{ auth()->user()->name }} </p>
+                                <i class='bx bx-chevron-down text-xl hidden md:block text-white group-hover:text-gray-800 '></i>
                             @endif
-                            <i class='bx bx-chevron-down text-xl hidden md:block'></i>
                         </button>
 
                     </div>
@@ -142,6 +149,10 @@
                         @endif
                     </div>
                     <ul class="py-1" role="none">
+                        <li>
+                            <a href="{{ route('my.space.index') }}"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">My Work Space</a>
+                        </li>
                         @role('super-admin')
                             <li>
 

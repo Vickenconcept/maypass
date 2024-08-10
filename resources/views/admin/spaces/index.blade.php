@@ -1,11 +1,32 @@
 <x-app-layout>
     <div class="container mx-auto px-4 py-8">
-        <h1 class="text-2xl font-bold mb-4">Manage Spaces</h1>
 
-        <div class="flex justify-end mb-4">
-            <a href="{{ route('spaces.create') }}" class="btn-primary">Create New Space</a>
+        <div class="flex justify-between items-center mb-4">
+            <h1 class="text-2xl font-bold mb-4">Manage Spaces</h1>
+            @can('create-space')
+                <a href="{{ route('spaces.create') }}" class="btn-primary">Create New Space</a>
+            @endcan
         </div>
 
+        <div class="grid md:grid-cols-2 ">
+            <div></div>
+            <form method="GET" action="{{ route('spaces.index') }}" class="mb-4">
+                <div class="flex space-x-4">
+                    <input type="text" name="search" placeholder="Search by name or category"
+                        value="" class="form-control2" >
+
+                    <select name="availability" onchange="this.form.submit()" class="form-control2">
+                        <option value="all" {{ request('availability') == 'all' ? 'selected' : '' }}>All</option>
+                        <option value="available" {{ request('availability') == 'available' ? 'selected' : '' }}>
+                            Available</option>
+                        <option value="non-available"
+                            {{ request('availability') == 'non-available' ? 'selected' : '' }}>Non-Available</option>
+                    </select>
+                    <button type="submit" class="btn-primary">Search</button>
+
+                </div>
+            </form>
+        </div>
 
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
@@ -38,9 +59,15 @@
                 <tbody>
                     @forelse ($spaces as $space)
                         <tr class="bg-white border-b  hover:bg-gray-50 ">
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap capitalize">
+                            <th scope="row"
+                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap capitalize ">
+                                @if ($space->image)
                                 <img src="{{ asset('storage/' . $space->image) }}" alt="{{ $space->name }}"
-                                    class="w-10 h-10 object-cover rounded">
+                                    class="w-12 h-14 object-cover rounded border-2">
+                                @else
+                                <img src="{{ asset('images/workspace.jpg') }}" alt="{{ $space->name }}"
+                                    class="w-12 h-14 object-cover rounded border-2">
+                                @endif
                             </th>
                             <td class="px-6 py-4 capitalize">
                                 {{ $space->name }}
@@ -51,7 +78,7 @@
                             <td class="px-6 py-4 capitalize">
                                 {{ $space->category->name }}
                             </td>
-                            <td class="px-6 py-4 capitalize text-center">
+                            <td class="px-6 py-4 capitalize text-center whitespace-nowrap">
 
                                 @if ($space->is_available)
                                     <span
@@ -64,16 +91,19 @@
                                 @endif
                             </td>
                             <td class="pr-1.5 pl-6 py-4 text-center">
-                                @if ($space->is_available)
-                                    <a href="{{ route('spaces.edit', $space->id) }}" class="btn-primary2">Edit</a>
-                                @endif
+                                @can('update-space')
+                                    @if ($space->is_available)
+                                        <a href="{{ route('spaces.edit', $space->id) }}" class="btn-primary2">Edit</a>
+                                    @endif
+                                @endcan
                             </td>
                             <td class="pr-6 pl-1.5 py-4 text-center  ">
-
-                                @if ($space->is_available)
-                                    <button type="button" data-item-id="{{ $space->id }}"
-                                        class="delete-btn bg-red-500 hover:bg-red-700 focus:bg-red-500 text-white rounded-lg px-5 py-1.5 text-sm whitespace-nowrap transition duration-300 ease-in-out">Delete</button>
-                                @endif
+                                @can('delete-space')
+                                    @if ($space->is_available)
+                                        <button type="button" data-item-id="{{ $space->id }}"
+                                            class="delete-btn bg-red-500 hover:bg-red-700 focus:bg-red-500 text-white rounded-lg px-5 py-1.5 text-sm whitespace-nowrap transition duration-300 ease-in-out">Delete</button>
+                                    @endif
+                                @endcan
 
                             </td>
                         </tr>

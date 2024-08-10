@@ -1,9 +1,11 @@
 <x-app-layout>
     <div class="container mx-auto px-4 py-8">
-        <h1 class="text-2xl font-bold mb-4">Manage Categories</h1>
 
-        <div class="flex justify-end mb-4">
-            <a href="{{ route('categories.create') }}" class="btn-primary">Create New Category</a>
+        <div class="flex justify-between items-center mb-4">
+            <h1 class="text-2xl font-bold mb-4">Manage Categories</h1>
+            @can('create-category')
+                <a href="{{ route('categories.create') }}" class="btn-primary">Create New Category</a>
+            @endcan
         </div>
 
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -35,16 +37,16 @@
                                 {{ $category->description }}
                             </td>
                             <td class="pr-1.5 pl-6 py-4 text-center">
-                                <a href="{{ route('categories.edit', $category->id) }}" class="btn-primary2">Edit</a>
+                                @can('update-category')
+                                    <a href="{{ route('categories.edit', $category->id) }}" class="btn-primary2">Edit</a>
+                                @endcan
                             <td class="pr-6 pl-1.5 py-4 text-center  ">
 
-                                <form action="{{ route('categories.destroy', $category->id) }}" method="POST"
-                                    class="inline-block">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit"
-                                        class="bg-red-500 hover:bg-red-700 focus:bg-red-500 text-white rounded-lg px-5 py-1.5 text-sm whitespace-nowrap transition duration-300 ease-in-out">Delete</button>
-                                </form>
+                                @can('delete-category')
+                                   
+                                        <button type="button" data-item-id="{{ $category->id }}"
+                                            class="delete-btn bg-red-500 hover:bg-red-700 focus:bg-red-500 text-white rounded-lg px-5 py-1.5 text-sm whitespace-nowrap transition duration-300 ease-in-out">Delete</button>
+                                @endcan
                             </td>
                         </tr>
                     @empty
@@ -59,7 +61,57 @@
                 </tbody>
             </table>
         </div>
-
-
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let deleteButtons = document.querySelectorAll('.delete-btn');
+
+            deleteButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    let itemId = button.getAttribute('data-item-id');
+
+                    Swal.fire({
+                        title: "Are you sure?",
+                        text: "Work space with this category will be deleted!",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Yes, delete it!"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            var deleteRoute =
+                                "{{ route('categories.destroy', ['category' => ':itemId']) }}";
+                            deleteRoute = deleteRoute.replace(':itemId', itemId);
+
+                            fetch(deleteRoute, {
+                                    method: 'DELETE',
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                    }
+                                })
+                                .then(response => {
+                                    Swal.fire({
+                                        title: "Deleted!",
+                                        text: "Your item has been deleted.",
+                                        icon: "success"
+                                    }).then(() => {
+                                        location
+                                            .reload();
+                                    });
+                                })
+                                .catch(error => {
+                                    Swal.fire("Error", "Failed to delete the item",
+                                        "error");
+                                });
+                        }
+                    });
+                });
+            });
+        });
+    </script>
 </x-app-layout>
