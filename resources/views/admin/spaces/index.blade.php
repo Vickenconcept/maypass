@@ -23,6 +23,9 @@
                         <th scope="col" class="px-6 py-3">
                             Category
                         </th>
+                        <th scope="col" class="px-6 py-3">
+                            Available
+                        </th>
                         <th scope="col" class="pr-1.5 pl-6 py-4 text-center">
 
                         </th>
@@ -48,6 +51,9 @@
                             <td class="px-6 py-4 capitalize">
                                 {{ $space->category->name }}
                             </td>
+                            <td class="px-6 py-4 capitalize">
+                                {{ $space->is_available }}
+                            </td>
                             <td class="pr-1.5 pl-6 py-4 text-center">
                                 <a href="{{ route('spaces.edit', $space->id) }}" class="btn-primary2">Edit</a>
                             <td class="pr-6 pl-1.5 py-4 text-center  ">
@@ -59,7 +65,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6"
+                            <td colspan="7"
                                 class="bg-white border-b  hover:bg-gray-50 text-center p-8 font-bold text-xl text-gray-400">
                                 No data yet
                             </td>

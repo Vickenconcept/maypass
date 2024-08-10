@@ -3,13 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Booking;
+use App\Models\Payment;
 use App\Models\Space;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
 
 class BookingController extends Controller
 {
- 
+
 
     public function index()
     {
@@ -30,6 +32,7 @@ class BookingController extends Controller
                 'space_id' => 'required|exists:spaces,id',
                 'days_count' => 'required',
                 'total_amount' => 'required',
+                'reference' => 'required',
             ]);
 
             $validated['user_id'] = auth()->id();
@@ -37,17 +40,40 @@ class BookingController extends Controller
             $currentDate = Carbon::now();
 
             $futureDate = $currentDate->addDays(intval($validated['days_count']));
-            
+
 
             $space = Space::find($validated['space_id']);
-            
-          
+
+
             if ($space->is_available) {
-                Booking::create($validated);
-                
+                $booking = Booking::create($validated);
+
                 $space->is_available = false;
                 $space->date_to_activate = $futureDate->format('Y-m-d');
                 $space->update();
+
+
+                Payment::create([
+                    'booking_id' => $booking->id,
+                    'amount' => $validated['total_amount'],
+                    'payment_method' => 'paystack',
+
+                ]);
+
+                $user = auth()->user();
+
+                $data = [
+                    'name' => $user->name,
+                    'space_name' => $space->name,
+                    'payment_method' => 'paystack',
+                    'price_per_day' => $validated['total_amount'] /  $validated['days_count'],
+                    'total_amount' => $validated['total_amount'],
+                    'days_count' => $validated['days_count'],
+                    'expiring_date' => $futureDate,
+                    'reference' => $validated['reference'],
+                ];
+
+                Mail::to($user->email)->send(new \App\Mail\SpacePuchasedMail($data));
 
                 return response()->json([
                     'success' => true,

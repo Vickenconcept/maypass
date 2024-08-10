@@ -19,7 +19,7 @@ class UserController extends Controller
                 $query->where('roles.id', $superAdminRoleId);
             })->get();
         } else {
-            $users = User::all(); // Fallback if the role does not exist
+            $users = User::all(); 
         }
         
         return view('admin.users.index', compact('users'));

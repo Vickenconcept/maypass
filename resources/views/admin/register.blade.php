@@ -1,19 +1,19 @@
 <x-app-layout>
     <div class="flex flex-col min-h-full justify-center bg-blue-200">
-        <div class="   px-6 py-8 lg:px-8 bg-[#02001a] rounded-3xl w-full md:w-[60%] lg:w-[40%] mx-auto">
+        <div class="   px-6 py-8 lg:px-8 bg-white rounded-3xl w-full md:w-[60%] lg:w-[40%] mx-auto">
             <div class="sm:mx-auto sm:w-full sm:max-w-sm">
                 <div class="flex justify-center space-x-1">
-                    <i class="bx bx-bot text-blue-500 text-3xl"></i>
+                    <i class="bx bx-bot text-[#25a0db] text-3xl"></i>
 
-                    <h1 class="text-gray-50 text-2xl"><b>Bot</b>Convert</h1>
+                    <h1 class="text-[#25a0db] text-2xl"><b>Bot</b>Convert</h1>
                 </div>
-                <h2 class=" text-center text-2xl font-bold leading-9 tracking-tight text-gray-50">Create User</h2>
+                <h2 class=" text-center text-2xl font-bold leading-9 tracking-tight text-[#25a0db]">Create User</h2>
             </div>
 
 
             <div class=" sm:mx-auto sm:w-full sm:max-w-sm">
                 @if ($errors->any())
-                    <div class="bg-red-50 text-red-300  p-3 border border-red-300 rounded">
+                    <div class="bg-red-100 text-red-500  p-3 border border-red-500 rounded">
                         <ul>
                             @foreach ($errors->all() as $error)
                                 <li>{{ $error }}</li>
@@ -24,7 +24,7 @@
                 <form class="space-y-3" action="{{ route('auth.register') }}" method="POST">
                     @csrf
                     <div>
-                        <label for="name" class="input-label text-gray-400">Name</label>
+                        <label for="name" class="input-label text-gray-600">Name</label>
                         <div class="mt-2">
                             <input id="name" name="name" value="{{ old('name') }}" type="text"
                                 autocomplete="name" class="form-control2" placeholder="Smith Joe">
@@ -36,7 +36,7 @@
 
 
                     <div>
-                        <label for="email" class="input-label text-gray-400">Email Address</label>
+                        <label for="email" class="input-label text-gray-600">Email Address</label>
                         <div class="mt-2">
                             <input id="email" name="email" value="{{ old('email') }}" type="text"
                                 autocomplete="email" class="form-control2" placeholder="example@gmail.com">
@@ -48,7 +48,7 @@
 
                     <div>
                         <div class="flex items-center justify-between">
-                            <label for="password" class="input-label text-gray-400">Password</label>
+                            <label for="password" class="input-label text-gray-600">Password</label>
                         </div>
                         <div class="mt-2">
                             <input id="password" name="password" type="password" autocomplete="current-password"
@@ -62,7 +62,7 @@
 
                     <div>
                         <div class="flex items-center justify-between">
-                            <label for="role" class="input-label text-gray-400">Role</label>
+                            <label for="role" class="input-label text-gray-600">Role</label>
                         </div>
                         <div class="mt-2">
                             <select name="role" id="role" class="form-control2">
@@ -74,18 +74,10 @@
 
                         </div>
                     </div>
-                    {{-- <div>
-                            <div class="flex items-center justify-between">
-                                <label for="password_confirmation" class="input-label text-gray-400">Password Confirmation</label>
-                            </div>
-                            <div class="mt-2">
-                                <input id="password_confirmation" name="password_confirmation" type="password"
-                                    autocomplete="current-password" class="form-control2" placeholder="********">
-                            </div>
-                        </div> --}}
+                  
 
                     <div class="pt-2">
-                        <button type="submit" class="btn-primary2  ">Register</button>
+                        <button type="submit" class="btn-basic  ">Register</button>
                     </div>
                 </form>
 

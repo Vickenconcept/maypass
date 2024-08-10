@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PasswordResetController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PinController;
 
 use App\Http\Controllers\RoleController;
@@ -86,17 +87,22 @@ Route::middleware(['auth', 'permission:delete-category'])->group(function () {
     Route::resource('categories', CategoryController::class)->only(['destroy']);
 });
 
-Route::middleware(['auth', 'permission:view-bookings'])->group(function () {
-    Route::resource('bookings', BookingController::class)->only(['index', 'show']);
+Route::middleware(['auth'])->group(function () {
     Route::get('/bookings/book/{space}', [BookingController::class, 'book'])->name('bookings.book');
+    Route::resource('bookings', BookingController::class);
 });
+
+// Route::middleware(['auth', 'permission:view-bookings'])->group(function () {
+// Route::get('/bookings/book/{space}', [BookingController::class, 'book'])->name('bookings.book');
+// Route::resource('bookings', BookingController::class)->only(['index', 'show']);
+// });
 
 Route::middleware(['auth', 'permission:manage-bookings'])->group(function () {
     Route::resource('bookings', BookingController::class)->only(['create', 'store', 'edit', 'update', 'destroy']);
 });
 
 Route::middleware(['auth', 'permission:view-payments'])->group(function () {
-    // Add routes related to viewing payments here
+    Route::resource('payments', PaymentController::class);
 });
 
 Route::middleware(['auth', 'permission:manage-users'])->group(function () {

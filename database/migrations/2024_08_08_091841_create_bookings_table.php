@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('space_id')->constrained()->onDelete('cascade');
+            $table->text('reference');
             $table->integer('days_count');
             $table->integer('total_amount');
             $table->enum('status', ['pending', 'confirmed', 'canceled'])->default('pending');

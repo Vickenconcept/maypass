@@ -10,7 +10,7 @@ class PaymentController extends Controller
     public function index()
     {
         $payments = Payment::with('booking')->get();
-        return view('payments.index', compact('payments'));
+        return view('admin.payments.index', compact('payments'));
     }
 
     public function create()
@@ -32,12 +32,12 @@ class PaymentController extends Controller
 
     public function show(Payment $payment)
     {
-        return view('payments.show', compact('payment'));
+        return view('admin.payments.show', compact('payment'));
     }
 
     public function edit(Payment $payment)
     {
-        return view('payments.edit', compact('payment'));
+        return view('admin.payments.edit', compact('payment'));
     }
 
     public function update(Request $request, Payment $payment)

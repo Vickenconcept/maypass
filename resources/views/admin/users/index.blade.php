@@ -1,6 +1,9 @@
 <x-app-layout>
     <div class="container mx-auto px-4 py-8">
-        <h1 class="text-2xl font-bold mb-4">Manage Users</h1>
+        <div class="flex items-center justify-between">
+            <h1 class="text-2xl font-bold mb-4">Manage Users</h1>
+            <a href="{{ route('register') }}" class="btn-primary">Create User</a>
+        </div>
     
         @if (session('success'))
             <div class="bg-green-500 text-white p-4 mb-4 rounded">

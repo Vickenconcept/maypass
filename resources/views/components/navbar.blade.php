@@ -1,4 +1,3 @@
-
 <nav class=" border-gray-200 bg-[#25a0db]">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-4 px-10">
         <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
@@ -17,7 +16,6 @@
         </button>
         <div class="hidden w-full md:block md:w-auto" id="navbar-default">
             <ul
-
                 class="font-medium flex flex-col p-4 md:p-0 mt-4 border  rounded-lg  md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0  ">
                 <li>
                     <a href="/" class="block py-2 px-3  text-white rounded md:bg-transparent  md:p-0  "
@@ -25,12 +23,16 @@
                 </li>
                 <li>
                     <a href="{{ route('spaces.index') }}"
-                        class="block py-2 px-3 rounded md:border-0 text-white md:hover:text-gray-300 md:p-0   hover:bg-gray-700 hover: md:hover:bg-transparent">Work Spaces</a>
+                        class="block py-2 px-3 rounded md:border-0 text-white md:hover:text-gray-300 md:p-0   hover:bg-gray-700 hover: md:hover:bg-transparent">Work
+                        Spaces</a>
                 </li>
+                @can('create-category')
                 <li>
                     <a href="{{ route('categories.index') }}"
                         class="block py-2 px-3 rounded md:border-0 text-white md:hover:text-gray-300 md:p-0   hover:bg-gray-700 hover: md:hover:bg-transparent">Categories</a>
                 </li>
+                @endcan
+                
                 <li>
                     <a href="{{ route('bookings.index') }}"
                         class="block py-2 px-3 rounded md:border-0 text-white md:hover:text-gray-300 md:p-0   hover:bg-gray-700 hover: md:hover:bg-transparent">Bookings</a>
@@ -68,18 +70,20 @@
                         @endif
                     </div>
                     <ul class="py-1" role="none">
-                        <li>
-                           
+                        @role('super-admin')
+                            <li>
+
                                 <a href="{{ route('roles.index') }}"
                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Roles</a>
 
-                        </li>
-                        <li>
-                           
+                            </li>
+                        @endrole
+                        @can('manage-users')
+                            <li>
                                 <a href="{{ route('admin.users.index') }}"
                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Users</a>
-
-                        </li>
+                            </li>
+                        @endcan
                         <li>
                             @if (auth()->check())
                                 <form action="{{ route('auth.logout') }}" method="POST">

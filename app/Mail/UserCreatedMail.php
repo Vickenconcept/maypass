@@ -17,52 +17,24 @@ class UserCreatedMail extends Mailable
 
     public $name;
     public $password;
+    public $email;
 
-    public function __construct( $name, $password)
+    public function __construct($name, $password,$email)
     {
         $this->name = $name;
         $this->password = $password;
+        $this->email = $email;
     }
-
-    // public function build()
-    // {
-    //     return $this->view('emails.user_created')
-    //                 ->with(['user' => $this->user]);
-    // }
-
-    /**
-     * Get the message envelope.
-     */
-    // public function envelope(): Envelope
-    // {
-    //     return new Envelope(
-    //         subject: 'User Created Mail',
-    //     );
-    // }
-
-    /**
-     * Get the message content definition.
-     */
-
 
     public function content(): Content
     {
         return new Content(
             view: 'emails.user_created',
             with: [
-                'user' => $this->name,
+                'name' => $this->name,
                 'password' => $this->password,
+                'email' => $this->email,
             ],
         );
     }
-
-    /**
-     * Get the attachments for the message.
-     *
-     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
-     */
-    // public function attachments(): array
-    // {
-    //     return [];
-    // }
 }

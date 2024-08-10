@@ -2,10 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 .form-control {
-    @apply block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-purple-600 sm:text-sm sm:leading-6;
+    @apply block w-full rounded-md border-2 border-gray-300   py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#25a0db] sm:text-sm sm:leading-6;
 }
 .form-control2 {
-    @apply block w-full rounded-full border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-purple-600 sm:text-sm sm:leading-6;
+    @apply block w-full rounded-md border-2 border-gray-300   py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#25a0db] sm:text-sm sm:leading-6;
 }
 
 .input-label {
@@ -26,7 +26,7 @@
 }
 
 .task-input {
-  @apply block w-full rounded-l-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6 col-span-3 rounded-tr-none;
+  @apply block w-full rounded-l-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-[#] placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6 col-span-3 rounded-tr-none;
 }
 
 .task-btn {

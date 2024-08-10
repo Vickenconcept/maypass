@@ -30,7 +30,7 @@ class AuthController extends Controller
                 'name' => 'required|string',
                 'email' => 'required|email|unique:users',
                 'password' => 'required',
-                // 'role' => 'sometimes',
+                'role' => 'required',
             ]);
             
             
@@ -39,7 +39,7 @@ class AuthController extends Controller
             $role = intval($request->role );
 
             $user->assignRole($role);
-            Mail::to($user->email)->send(new \App\Mail\UserCreatedMail($user->name, $data['password']));
+            Mail::to($user->email)->send(new \App\Mail\UserCreatedMail($user->name, $data['password'], $user->email));
 
             // event(new UserCreated($user));
 
