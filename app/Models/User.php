@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 // use Laravel\Sanctum\HasApiTokens;
-use Spatie\Permission\Contracts\Role;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
@@ -45,8 +44,9 @@ class User extends Authenticatable
         ];
     }
 
-    public function role()
+
+    public function bookings()
     {
-        return $this->belongsTo(Role::class);
+        return $this->hasMany(Booking::class);
     }
 }

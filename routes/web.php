@@ -10,11 +10,12 @@ use App\Http\Controllers\PinController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SpaceController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserSpaceController;
 use App\Models\Space;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    $spaces =  Space::where('is_available', true)->latest()->get();
+    $spaces = Space::where('is_available', true)->latest()->get()->shuffle();
     return view('home', compact('spaces'));
 })->name('home');
 
@@ -33,17 +34,32 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
-
         return view('dashboard');
     })->name('dashboard');
 
+    Route::get('/notifications/mark-as-read', function () {
+        auth()->user()->unreadNotifications->markAsRead();
+        return redirect()->back();
+    })->name('notifications.mark-as-read');
 
+
+    Route::get('/notifications/{id}', function ($id) {
+        $notification = auth()->user()->notifications()->find($id);
+
+        if ($notification) {
+            $notification->markAsRead();
+        }
+
+       return redirect()->back();
+    })->name('notifications.read_one');;
+
+    Route::get('my-spaces', [UserSpaceController::class, 'index'])->name('my.space.index');
+    Route::get('/my-spaces/{space}', [UserSpaceController::class, 'show'])->name('my.space.show');
     Route::post('auth/logout', [AuthController::class, 'logout'])->name('auth.logout');
 });
 
 
 Route::middleware(['auth', 'role:super-admin'])->group(function () {
-
     Route::post('/roles/{role}/permissions', [RoleController::class, 'updatePermissions'])->name('roles.permissions.update');
     Route::resource('roles', RoleController::class);
 
@@ -52,7 +68,6 @@ Route::middleware(['auth', 'role:super-admin'])->group(function () {
         Route::post('auth/register', 'register')->name('auth.register');
     });
 });
-
 
 
 Route::middleware(['auth', 'permission:create-space'])->group(function () {
@@ -89,6 +104,7 @@ Route::middleware(['auth', 'permission:delete-category'])->group(function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/bookings/book/{space}', [BookingController::class, 'book'])->name('bookings.book');
+    Route::post('/booking/{id}/status', [BookingController::class, 'updateStatus'])->name('booking.updateStatus');
     Route::resource('bookings', BookingController::class);
 });
 

@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->decimal('price_per_day', 10, 2);
             $table->boolean('is_available')->default(true);
-            $table->date('date_to_activate')->nullable();
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });

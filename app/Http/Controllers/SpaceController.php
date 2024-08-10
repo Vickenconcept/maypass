@@ -10,7 +10,7 @@ class SpaceController extends Controller
 {
     public function index()
     {
-        $spaces = Space::with('category')->get();
+        $spaces = Space::with('category')->paginate(10);
         return view('admin.spaces.index', compact('spaces'));
     }
 

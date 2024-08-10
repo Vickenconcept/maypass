@@ -37,7 +37,7 @@
         <x-notification />
         <x-session-msg />
         {{-- <x-pre-loader /> --}}
-       <div class="px-3 md:px-10 lg:px-20">
+       <div class="px-3 md:px-10 lg:px-20 pb-10">
         {{ $slot }}
        </div>
     </div>
@@ -49,11 +49,8 @@
         }
     </script>
 
-    <footer class="bg-white shadow-md mt-10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 text-center text-gray-600">
-            &copy; {{ date('Y') }} Cowork Space Booking. All rights reserved.
-        </div>
-    </footer>
+    <x-footer />
+       
 
     @livewireScripts
 </body>

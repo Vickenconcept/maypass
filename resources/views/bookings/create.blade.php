@@ -108,10 +108,10 @@
     <script src="https://js.paystack.co/v2/inline.js"></script>
     <script>
         if (currencyInput.value !== null) {
-            
+
             function payWithPaystack(e) {
                 e.preventDefault();
-    
+
                 let handler = PaystackPop.setup({
                     key: 'pk_test_a683d1e021670d61207a3fb1241bf4d23c92ca40', // Replace with your public key
                     email: document.getElementById("email-address").value,
@@ -123,8 +123,8 @@
                     callback: function(response) {
                         let message = 'Payment complete! Reference: ' + response.reference;
                         // console.log('this is it' + message);
-    
-    
+
+
                         let data = {
                             reference: response.reference,
                             email: document.getElementById("email-address").value,
@@ -133,7 +133,7 @@
                             days_count: currencyInput.value,
                             _token: '{{ csrf_token() }}'
                         };
-    
+
                         // Submit the data to your server route
                         let creatRoute = "{{ route('bookings.store') }}";
                         fetch(creatRoute, {
@@ -147,19 +147,20 @@
                             .then(response => {
                                 if (response.ok) {
                                     return response.json();
-    
+
                                 } else {
-                                    throw new Error('Payment submission failed.');
+                                    throw new Error(' submission failed.');
                                 }
                             })
                             .then(data => {
                                 if (data.success) {
                                     console.log('Server response:', data.message);
-    
-                                    alert(data.message); // Display the success message to the user
-                                    setInterval(() => {
-                                        // location.reload();
-                                    }, 1000);
+
+                                    alert(data.message);
+                                    setTimeout(() => {
+                                        location.href = "/my-spaces";
+                                    }, 500);
+
                                 } else {
                                     console.error('Server error:', data.message);
                                     setInterval(() => {
@@ -172,7 +173,7 @@
                             });
                     }
                 });
-    
+
                 handler.openIframe();
             }
         }

@@ -23,7 +23,7 @@
                         <th scope="col" class="px-6 py-3">
                             Category
                         </th>
-                        <th scope="col" class="px-6 py-3">
+                        <th scope="col" class="px-6 py-3 text-center">
                             Available
                         </th>
                         <th scope="col" class="pr-1.5 pl-6 py-4 text-center">
@@ -51,15 +51,29 @@
                             <td class="px-6 py-4 capitalize">
                                 {{ $space->category->name }}
                             </td>
-                            <td class="px-6 py-4 capitalize">
-                                {{ $space->is_available }}
+                            <td class="px-6 py-4 capitalize text-center">
+
+                                @if ($space->is_available)
+                                    <span
+                                        class="border border-green-600 bg-green-100 text-green-600 px-4 py-1 rounded-full font-semibold text-xs ">
+                                        Available</span>
+                                @else
+                                    <span
+                                        class="border border-red-500 bg-red-100 text-red-500 px-4 py-1 rounded-full font-semibold text-xs ">
+                                        Not Available</span>
+                                @endif
                             </td>
                             <td class="pr-1.5 pl-6 py-4 text-center">
-                                <a href="{{ route('spaces.edit', $space->id) }}" class="btn-primary2">Edit</a>
+                                @if ($space->is_available)
+                                    <a href="{{ route('spaces.edit', $space->id) }}" class="btn-primary2">Edit</a>
+                                @endif
+                            </td>
                             <td class="pr-6 pl-1.5 py-4 text-center  ">
 
-                                <button type="button" data-item-id="{{ $space->id }}"
-                                    class="delete-btn bg-red-500 hover:bg-red-700 focus:bg-red-500 text-white rounded-lg px-5 py-1.5 text-sm whitespace-nowrap transition duration-300 ease-in-out">Delete</button>
+                                @if ($space->is_available)
+                                    <button type="button" data-item-id="{{ $space->id }}"
+                                        class="delete-btn bg-red-500 hover:bg-red-700 focus:bg-red-500 text-white rounded-lg px-5 py-1.5 text-sm whitespace-nowrap transition duration-300 ease-in-out">Delete</button>
+                                @endif
 
                             </td>
                         </tr>
@@ -74,6 +88,9 @@
 
                 </tbody>
             </table>
+        </div>
+        <div class="mt-4">
+            {{ $spaces->links() }}
         </div>
 
     </div>
@@ -106,7 +123,7 @@
                                     method: 'DELETE',
                                     headers: {
                                         'Content-Type': 'application/json',
-                                        'X-CSRF-TOKEN': '{{ csrf_token() }}' 
+                                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
                                     }
                                 })
                                 .then(response => {

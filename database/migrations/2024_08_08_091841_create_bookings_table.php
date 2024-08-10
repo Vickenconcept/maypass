@@ -17,8 +17,9 @@ return new class extends Migration
             $table->foreignId('space_id')->constrained()->onDelete('cascade');
             $table->text('reference');
             $table->integer('days_count');
+            $table->date('date_to_activate')->nullable();
             $table->integer('total_amount');
-            $table->enum('status', ['pending', 'confirmed', 'canceled'])->default('pending');
+            $table->enum('status', ['pending', 'confirmed', 'canceled', 'ended'])->default('pending');
             $table->timestamps();
         });
     }
