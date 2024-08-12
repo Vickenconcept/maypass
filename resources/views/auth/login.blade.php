@@ -1,6 +1,6 @@
 <x-guest-layout>
     <div class="flex flex-col min-h-full justify-center bg-blue-200">
-        <div class="   px-6 py-12 lg:px-8 bg-[#02001a] rounded-3xl w-full md:w-[60%] lg:w-[40%] mx-auto">
+        <div class="   px-6 py-12 lg:px-8 bg-[#02001a] rounded-3xl w-full md:w-[70%] lg:w-[40%] mx-auto">
 
             <div class="sm:mx-auto sm:w-full sm:max-w-sm">
                 <div class="flex justify-center space-x-1">

@@ -21,6 +21,7 @@
 </head>
 
 <body class="h-full">
+    <x-navbar />
     <x-notification />
     <x-session-msg />
     {{ $slot }}

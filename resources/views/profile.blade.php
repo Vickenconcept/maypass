@@ -8,7 +8,7 @@
             <span class="text-sm">Manage your account</span>
         </div>
 
-        <section class="space-y-8  px-3 md:px-10 py-10 bg-white rounded-lg md:w-[60%] mx-auto">
+        <section class="space-y-8  px-3 md:px-10 py-10 bg-white rounded-lg md:w-[70%] mx-auto">
             <div class="">
                 <form action="{{ route('changeName') }}" method="POST" class=" space-y-4 ">
                     @csrf

@@ -1,5 +1,5 @@
-<x-app-layout>
-    <div class="container mx-auto px-4 py-8">
+<x-guest-layout>
+    <div class="container mx-auto px-4  mt-14 md:w-[90%]">
         {{-- <h1 class="text-2xl font-bold border-y border-gray-500 py-3">Available Work Spaces</h1> --}}
 
         <section class=" space-y-5 pt-5 flex flex-col justify-center items-center mb-10 ">
@@ -96,4 +96,4 @@
 
     </div>
 
-</x-app-layout>
+</x-guest-layout>

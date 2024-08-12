@@ -33,26 +33,7 @@
                         class="block py-2 px-3  text-white rounded   md:px-0   @if (request()->routeIs('home')) underline @endif "
                         aria-current="page">Home</a>
                 </li>
-                @can('view-space')
-                    <li>
-                        <a href="{{ route('spaces.index') }}"
-                            class="block py-2 px-3 rounded md:border-0 text-white md:hover:text-gray-300 md:px-0   @if (request()->routeIs('spaces.index')) underline @endif">Work
-                            Spaces</a>
-                    </li>
-                @endcan
-                @can('view-category')
-                    <li>
-                        <a href="{{ route('categories.index') }}"
-                            class="block py-2 px-3 rounded md:border-0 text-white md:hover:text-gray-300 md:px-0   @if (request()->routeIs('categories.index')) underline @endif">Categories</a>
-                    </li>
-                @endcan
-
-                @can('view-bookings')
-                    <li>
-                        <a href="{{ route('bookings.index') }}"
-                            class="block py-2 px-3 rounded md:border-0 text-white md:hover:text-gray-300 md:px-0   @if (request()->routeIs('bookings.index')) underline @endif">Bookings</a>
-                    </li>
-                @endcan
+                
                 @auth
 
                     <li class="flex item-center justify-center">
@@ -155,20 +136,7 @@
                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">My Work Space</a>
                             </li>
                         @endauth
-                        @role('super-admin')
-                            <li>
-
-                                <a href="{{ route('roles.index') }}"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Roles</a>
-
-                            </li>
-                        @endrole
-                        @can('manage-users')
-                            <li>
-                                <a href="{{ route('admin.users.index') }}"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Users</a>
-                            </li>
-                        @endcan
+                        
                         @auth
 
                             <li>

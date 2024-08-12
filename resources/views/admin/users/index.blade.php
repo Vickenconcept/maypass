@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="container mx-auto px-4 py-8">
+    <div class="container mx-auto px-4 ">
         <div class="flex items-center justify-between border-y  border-gray-500 py-2 mb-10">
             <h1 class="text-2xl font-bold  mb-4">Manage Users</h1>
             <a href="{{ route('register') }}" class="btn-primary">Create User</a>

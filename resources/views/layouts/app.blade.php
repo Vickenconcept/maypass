@@ -36,10 +36,11 @@
     <div id="ap" class="min-h-screen bg-gray-100 text-gray-800" x-data="{ openHelp: false }">
 
         <x-navbar />
+        <x-sidebar />
         <x-notification />
         <x-session-msg />
         {{-- <x-pre-loader /> --}}
-       <div class="px-3 md:px-10 lg:px-20 pb-10 mt-16">
+       <div class="  sm:ml-64  px-3 md:px-10  pb-10 mt-16 pt-10">
         {{ $slot }}
        </div>
     </div>

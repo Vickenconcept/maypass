@@ -1,5 +1,5 @@
 <x-app-layout>
-        <div class=" mx-auto px-6 py-8 md:w-[50%] shadow rounded-xl bg-white mt-20">
+        <div class=" mx-auto px-6 py-8 md:w-[50%] shadow rounded-xl bg-white">
             <div class="mb-4">
                 <a href="{{ route('roles.index') }}"  class="flex items-center font-semibold hover:text-[#b30000]">
                   <i class='bx bx-chevron-left text-xl mt-1 '></i><span>Back</span>

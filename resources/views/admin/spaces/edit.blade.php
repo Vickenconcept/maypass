@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="container mx-auto px-4 py-8 md:w-[60%]">
+    <div class="container mx-auto px-4  md:w-[70%]">
         <h1 class="text-2xl font-bold mb-4">Edit Space</h1>
 
         <div class="bg-white rounded-lg shadow-md p-6">

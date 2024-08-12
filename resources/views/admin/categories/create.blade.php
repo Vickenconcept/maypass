@@ -1,8 +1,8 @@
 <x-app-layout>
-    <div class="container mx-auto px-4 py-8">
+    <div class="container mx-auto px-4 ">
         <h1 class="text-2xl font-bold mb-10">Create New Category</h1>
     
-        <div class="bg-white rounded-lg shadow-md p-6 md:w-[60%] mx-auto ">
+        <div class="bg-white rounded-lg shadow-md p-6 md:w-[70%] mx-auto ">
             <form action="{{ route('categories.store') }}" method="POST">
                 @csrf
     

@@ -1,6 +1,6 @@
 <x-guest-layout>
 
-    <x-navbar />
+    {{-- <x-navbar /> --}}
     <aside id="logo-sidebar"
         class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-[#c9eeff] sm:translate-x-0 "
         aria-label="Sidebar">

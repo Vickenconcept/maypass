@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class=" mx-auto px-4 py-8">
+    <div class=" mx-auto px-4 ">
         <h1 class="text-2xl font-bold mb-4">Book Work Space</h1>
 
         <section class="grid md:grid-cols-3 gap-5">
