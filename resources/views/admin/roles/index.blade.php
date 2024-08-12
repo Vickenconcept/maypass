@@ -11,7 +11,7 @@
             <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4 ">
                 @foreach ($roles as $key => $role)
                     <div
-                        class="{{ $loop->even ? 'bg-white ' : 'bg-[#25a0db] text-white' }} border border-gray-300 rounded-lg p-4 hover:shadow-lg delay-75 transition duration-700 ease-in-out">
+                        class="{{ $loop->even ? 'bg-white ' : 'bg-[#b30000] text-white' }} border border-gray-300 rounded-lg p-4 hover:shadow-lg delay-75 transition duration-700 ease-in-out">
                         <h3 class=" font-bold mb-2 text-xl uppercase">{{ $role->name }}</h3>
 
                         <form action="{{ route('roles.permissions.update', $role->id) }}" method="POST">

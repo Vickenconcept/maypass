@@ -2,11 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 .form-control {
-    @apply bg-gray-50 border-2 border-[#25a0db] text-gray-900 text-sm rounded-2xl focus:ring-[#25a0db] focus:border-[#25a0db] block w-full p-2.5;
+    @apply bg-gray-50 border-2 border-[#b30000] text-gray-900 text-sm rounded-2xl focus:ring-[#b30000] focus:border-[#b30000] block w-full p-2.5;
 }
 
 .form-control2 {
-    @apply bg-gray-50 border-2 border-[#25a0db] text-gray-900 text-sm rounded-lg focus:ring-[#25a0db] focus:border-[#25a0db] block w-full p-2.5;
+    @apply bg-gray-50 border-2 border-[#b30000] text-gray-900 text-sm rounded-lg focus:ring-[#b30000] focus:border-[#b30000] block w-full p-2.5;
 }
 
 .input-label {
@@ -14,13 +14,13 @@
 }
 
 .btn-basic {
-    @apply bg-[#25a0db] text-white px-5 py-2 block w-full text-sm whitespace-nowrap transition duration-300 ease-in-out rounded-lg  hover:bg-white hover:text-[#25a0db] border-2 border-[#25a0db] hover:shadow-md;
+    @apply bg-[#b30000] text-white px-5 py-2 block w-full text-sm whitespace-nowrap transition duration-300 ease-in-out rounded-lg  hover:bg-white hover:text-[#b30000] border-2 border-[#b30000] hover:shadow-md;
 }
 .btn-primary {
-    @apply bg-[#25a0db] text-white px-5 py-2 text-sm whitespace-nowrap transition duration-300 ease-in-out rounded-lg  hover:bg-white hover:text-[#25a0db] border-2 border-[#25a0db] hover:shadow-md;
+    @apply bg-[#b30000] text-white px-5 py-2 text-sm whitespace-nowrap transition duration-300 ease-in-out rounded-lg  hover:bg-white hover:text-[#b30000] border-2 border-[#b30000] hover:shadow-md;
 }
 .btn-primary2 {
-    @apply border-2 border-[#25a0db] bg-white hover:bg-[#25a0db] hover:text-white focus:bg-[#25a0db] text-[#25a0db] rounded-lg px-5 py-2 text-sm whitespace-nowrap transition duration-300 ease-in-out hover:shadow-md;
+    @apply border-2 border-[#b30000] bg-white hover:bg-[#b30000] hover:text-white focus:bg-[#b30000] text-[#b30000] rounded-lg px-5 py-2 text-sm whitespace-nowrap transition duration-300 ease-in-out hover:shadow-md;
 }
 .card-animate {
     @apply transition duration-300 ease-linear;

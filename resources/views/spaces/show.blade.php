@@ -70,7 +70,7 @@
                             @endif
                         </div>
                         {{-- <div
-                            class="w-full bg-[#25a0db] bg-opacity-50 group-hover:text-white  h-full relative -translate-x-full group-hover:translate-x-0 transition-all duration-700">
+                            class="w-full bg-[#b30000] bg-opacity-50 group-hover:text-white  h-full relative -translate-x-full group-hover:translate-x-0 transition-all duration-700">
                             <div class=" z-10  h-full flex items-center justify-center">
                                 <div class="text-center">
                                     <a href="{{ route('bookings.book', $space->id) }}" class=" hover:underline">

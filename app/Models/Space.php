@@ -25,7 +25,7 @@ class Space extends Model
 
     public function owner()
     {
-        return $this->hasOne(Booking::class)->withDefault();
+        return $this->hasOne(Booking::class)->latestOfMany('created_at');
     }
 
     public function users()

@@ -4,7 +4,7 @@
 
             <div class="sm:mx-auto sm:w-full sm:max-w-sm">
                 <div class="flex justify-center space-x-1">
-                    <i class="bx bx-bot text-[#25a0db] text-3xl"></i>
+                    <i class="bx bx-bot text-[#b30000] text-3xl"></i>
 
                     <h1 class="text-gray-50 text-2xl"><b>May</b>Pass</h1>
                 </div>

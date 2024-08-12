@@ -14,14 +14,14 @@
                         <div class="p-4">
                             <h3 class="text-xl font-bold uppercase">{{ $booking->space->name }}</h3>
                             <p class="text-gray-700 font-medium">
-                                <span class="text-[#25a0db] font-bold">
+                                <span class="text-[#b30000] font-bold">
                                     Date:
                                 </span>
                                 {{ $booking->created_at->format('d M Y') }}
                             </p>
 
                             <p class="text-gray-700 font-medium">
-                                <span class="text-[#25a0db] font-bold">
+                                <span class="text-[#b30000] font-bold">
                                     Status:
                                 </span>
 
@@ -44,14 +44,14 @@
                                 @endif
                             </p>
                             <p class="text-gray-700 font-medium">
-                                <span class="text-[#25a0db] font-bold">
+                                <span class="text-[#b30000] font-bold">
                                     Duration:
                                 </span>
                                 {{ $booking->days_count }} days
                             </p>
 
                             <p class="text-gray-700 font-medium">
-                                <span class="text-[#25a0db] font-bold">
+                                <span class="text-[#b30000] font-bold">
                                     Expires:
                                 </span>
                                 {{ \Carbon\Carbon::parse($booking->date_to_activate)->format('F j, Y') }}
@@ -100,7 +100,7 @@
                                     @endif
                                 </div>
                                 <div
-                                    class="w-full bg-[#25a0db] bg-opacity-10 group-hover:text-white  h-full relative -translate-x-full group-hover:translate-x-0 transition-all duration-700">
+                                    class="w-full bg-[#b30000] bg-opacity-10 group-hover:text-white  h-full relative -translate-x-full group-hover:translate-x-0 transition-all duration-700">
                                     <div class=" z-10  h-full flex items-center justify-center">
                                         <div class="text-center">
                                             {{-- <p class="text-md font-bold capitalize">{{ $space->name }}</p> --}}

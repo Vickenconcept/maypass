@@ -7,7 +7,7 @@
                 <h2 class="text-lg font-bold">
                     {{ $space->name }}
                     <span
-                        class="border-2 border-[#25a0db]  text-[#25a0db] rounded-full px-3 py-0.5 text-sm font-bold mx-3">
+                        class="border-2 border-[#b30000]  text-[#b30000] rounded-full px-3 py-0.5 text-sm font-bold mx-3">
                         # <span id="total_price"></span> / day
 
                     </span>
@@ -54,7 +54,7 @@
                         <div class="mb-3">
                             <div>
                                 <input
-                                    class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:ring-[#25a0db] focus:border-[#25a0db] transition-colors"
+                                    class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:ring-[#b30000] focus:border-[#b30000] transition-colors"
                                     placeholder="1000" type="hidden" id="amount" required />
                             </div>
                         </div>
@@ -70,10 +70,10 @@
                 <div class="h-[200px]">
                     @if ($space->image)
                         <img src="{{ asset('storage/' . $space->image) }}" alt="{{ $space->name }}"
-                            class="w-full h-48 object-cover rounded-lg border-2 border-[#25a0db]">
+                            class="w-full h-48 object-cover rounded-lg border-2 border-[#b30000]">
                     @else
                         <img src="{{ asset('images/workspace.jpg') }}" alt="{{ $space->name }}"
-                            class="w-full h-48 object-cover rounded-lg border-2 border-[#25a0db]">
+                            class="w-full h-48 object-cover rounded-lg border-2 border-[#b30000]">
                     @endif
                 </div>
                 <div>
