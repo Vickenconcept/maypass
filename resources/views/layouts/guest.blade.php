@@ -25,6 +25,7 @@
     <x-notification />
     <x-session-msg />
     {{ $slot }}
+    <x-footer />
 
 </body>
 

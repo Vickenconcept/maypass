@@ -1,6 +1,6 @@
 <x-app-layout>
-    <div class="container mx-auto px-4 pt-2">
-        <h2 class="text-2xl font-bold mb-8 mt-10  border-y  border-gray-500 py-3 ">My Bookings</h2>
+    <div class="container mx-auto px-4">
+        <h2 class="text-2xl font-bold mb-8  border-y  border-gray-500 py-3 ">My Bookings</h2>
 
         {{-- @if ($bookings->isEmpty())
             <div
@@ -79,7 +79,6 @@
             <div
                 class="p-20 bg-white  shadow-md rounded-lg overflow-hidden flex items-center justify-center md:col-span-2 lg:col-span-3">
                 <img src="{{ asset('images/empty.svg') }}" alt="">
-                <p>You are not currently part of any active workspaces.</p>
             </div>
         @else
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

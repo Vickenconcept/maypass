@@ -43,6 +43,7 @@
        <div class="  sm:ml-64  px-3 md:px-10  pb-10 mt-16 pt-10">
         {{ $slot }}
        </div>
+       <x-footer />
     </div>
 
     <script>
@@ -52,7 +53,7 @@
         }
     </script>
 
-    <x-footer />
+    
        
 
     @livewireScripts
