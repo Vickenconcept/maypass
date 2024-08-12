@@ -1,7 +1,7 @@
 <x-app-layout>
-    <div class="   h-full">
+    <div class=" h-full">
 
-        <div class=" my-8 border-y  border-gray-500 py-3 px-3 md:px-10 flex space-x-3 items-center ">
+        <div class=" mb-8 border-y  border-gray-500 py-3 px-3 md:px-10 flex space-x-3 items-center ">
             <div>
                 <h3 class="font-bold text-xl">My Profile</h3>
             </div>

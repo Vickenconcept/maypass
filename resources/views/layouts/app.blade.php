@@ -19,9 +19,9 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js "></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    
+
     <script type="text/javascript" src="https://jeremyfagis.github.io/dropify/dist/js/dropify.min.js"></script>
-<link rel="stylesheet" type="text/css" href="https://jeremyfagis.github.io/dropify/dist/css/dropify.min.css">
+    <link rel="stylesheet" type="text/css" href="https://jeremyfagis.github.io/dropify/dist/css/dropify.min.css">
 
 
 
@@ -40,10 +40,13 @@
         <x-notification />
         <x-session-msg />
         {{-- <x-pre-loader /> --}}
-       <div class="  sm:ml-64  px-3 md:px-10  pb-10 mt-16 pt-10">
-        {{ $slot }}
-       </div>
-       <x-footer />
+        <div class="  sm:ml-64  px-3 md:px-10  pb-10 mt-16 pt-10">
+            {{ $slot }}
+        </div>
+        <div class="sm:ml-64 ">
+            <x-footer />
+        </div>
+
     </div>
 
     <script>
@@ -53,8 +56,8 @@
         }
     </script>
 
-    
-       
+
+
 
     @livewireScripts
 </body>
