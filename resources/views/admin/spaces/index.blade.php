@@ -1,7 +1,7 @@
 <x-app-layout>
     <div class="container mx-auto px-4 py-8">
 
-        <div class="flex justify-between items-center mb-4">
+        <div class="flex justify-between items-center mb-4 border-y  border-gray-500 py-2  mb-4">
             <h1 class="text-2xl font-bold mb-4">Manage Spaces</h1>
             @can('create-space')
                 <a href="{{ route('spaces.create') }}" class="btn-primary">Create New Space</a>
@@ -73,7 +73,7 @@
                                 {{ $space->name }}
                             </td>
                             <td class="px-6 py-4 capitalize">
-                                ${{ $space->price_per_day }}
+                                #{{ $space->price_per_day }}
                             </td>
                             <td class="px-6 py-4 capitalize">
                                 {{ $space->category->name }}

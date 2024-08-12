@@ -15,10 +15,9 @@ class CheckExpiredBookings extends Command
 
     public function handle()
     {
-        // Get current date and time
         $now = Carbon::now();
         $expiredBookings = Booking::where('date_to_activate', '<', $now)
-            ->where('status', 'confirmed')  // Only consider confirmed bookings
+            ->where('status', 'confirmed')  
             ->get();
         
 
@@ -27,9 +26,10 @@ class CheckExpiredBookings extends Command
             $space->is_available = true;
             $space->save();
 
-            // Optionally, update the booking status to 'expired'
             $booking->status = 'ended';
             $booking->save();
+
+            $space->users()->detach();
         }
         
 

@@ -16,15 +16,18 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    
+
 
 </head>
 
 <body class="h-full">
+    <x-notification />
+    <x-session-msg />
     {{ $slot }}
 
 </body>
 
 
 @stack('scripts')
+
 </html>

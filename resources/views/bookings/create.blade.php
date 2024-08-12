@@ -66,8 +66,8 @@
                 </form>
 
             </div>
-            <div class="md:col-span-1 bg-white rounded-lg shadow-md p-6">
-                <div class="h-[300px]">
+            <div class="md:col-span-1 bg-white rounded-lg shadow-md p-6 space-y-2">
+                <div class="h-[200px]">
                     @if ($space->image)
                         <img src="{{ asset('storage/' . $space->image) }}" alt="{{ $space->name }}"
                             class="w-full h-48 object-cover rounded-lg border-2 border-[#25a0db]">
@@ -75,6 +75,9 @@
                         <img src="{{ asset('images/workspace.jpg') }}" alt="{{ $space->name }}"
                             class="w-full h-48 object-cover rounded-lg border-2 border-[#25a0db]">
                     @endif
+                </div>
+                <div>
+                    <p class="text-sm">{{ $space->description }}</p>
                 </div>
             </div>
         </section>

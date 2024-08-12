@@ -38,6 +38,7 @@ class CategoryController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
+            'description' => 'sometimes|string',
         ]);
 
         $category->update($validated);

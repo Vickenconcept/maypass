@@ -41,13 +41,27 @@ class RoleController extends Controller
                 'permissions.*' => 'integer|exists:permissions,id',
             ]);
 
-            // Convert permissions to integers
             $validated['permissions'] = array_map('intval', $validated['permissions']);
 
-            // Sync permissions
             $role->syncPermissions($validated['permissions']);
 
             return redirect()->route('roles.index')->with('success', 'Permissions updated successfully.');
+        } catch (\Exception $e) {
+
+            return back()->with('error', 'An error occurred while updating permissions.');
+        }
+    }
+    public function update(Request $request, Role $role)
+    {
+        try {
+            $validated = $request->validate([
+                'name' => 'required',
+            ]);
+
+            $role->name = $validated['name'];
+            $role->update();
+
+            return redirect()->route('roles.index')->with('success', 'Title updated successfully.');
         } catch (\Exception $e) {
 
             return back()->with('error', 'An error occurred while updating permissions.');

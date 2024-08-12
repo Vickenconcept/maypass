@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="container mx-auto px-4 py-8">
-        <h1 class="text-2xl font-bold mb-4">Manage Bookings</h1>
+        <h1 class="text-2xl font-bold border-y  border-gray-500 py-3 mb-4">Manage Bookings</h1>
 
         <div class="grid md:grid-cols-2 ">
             <div></div>

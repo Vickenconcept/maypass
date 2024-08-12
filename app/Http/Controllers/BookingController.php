@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Notifications\SpacePurchasedNotification;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
 class BookingController extends Controller
@@ -19,8 +20,6 @@ class BookingController extends Controller
     {
 
         $query = Booking::with(['user', 'space']);
-
-        // Filter by search term (reference, space name, or user name)
         if ($request->has('search')) {
             $search = $request->input('search');
             $query->where(function ($query) use ($search) {
@@ -34,13 +33,12 @@ class BookingController extends Controller
             });
         }
 
-        // Filter by status
         if ($request->has('status') && $request->input('status') !== 'all') {
             $status = $request->input('status');
             $query->where('status', $status);
         }
 
-        $bookings = $query->paginate(10);
+        $bookings = $query->latest()->paginate(10);
 
         return view('admin.bookings.index', compact('bookings'));
     }
@@ -76,6 +74,15 @@ class BookingController extends Controller
 
                 $space->is_available = false;
                 $space->update();
+
+                
+                DB::table('user_space')->insert([
+                    'user_id' => auth()->id(),
+                    'space_id' => $space->id,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+               
 
 
                 Payment::create([

@@ -39,7 +39,7 @@
         <x-notification />
         <x-session-msg />
         {{-- <x-pre-loader /> --}}
-       <div class="px-3 md:px-10 lg:px-20 pb-10">
+       <div class="px-3 md:px-10 lg:px-20 pb-10 mt-16">
         {{ $slot }}
        </div>
     </div>

@@ -4,13 +4,12 @@
 
             <div class="sm:mx-auto sm:w-full sm:max-w-sm">
                 <div class="flex justify-center space-x-1">
-                    <i class="bx bx-bot text-blue-500 text-3xl"></i>
+                    <i class="bx bx-bot text-[#25a0db] text-3xl"></i>
 
-                    <h1 class="text-gray-50 text-2xl"><b>Bot</b>Convert</h1>
+                    <h1 class="text-gray-50 text-2xl"><b>May</b>Pass</h1>
                 </div>
                 <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-50">Sign in to your
                     account</h2>
-                <p class="text-xs text-gray-500 text-center">Add Your Datails</p>
             </div>
 
             <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">

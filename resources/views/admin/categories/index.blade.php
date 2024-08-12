@@ -1,7 +1,7 @@
 <x-app-layout>
     <div class="container mx-auto px-4 py-8">
 
-        <div class="flex justify-between items-center mb-4">
+        <div class="flex justify-between items-center mb-4 border-y  border-gray-500 py-2  mb-4">
             <h1 class="text-2xl font-bold mb-4">Manage Categories</h1>
             @can('create-category')
                 <a href="{{ route('categories.create') }}" class="btn-primary">Create New Category</a>

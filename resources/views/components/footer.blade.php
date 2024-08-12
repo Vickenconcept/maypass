@@ -3,7 +3,7 @@
 @php
     // $spaces =  \app\Models\Space::latest()->get();
 @endphp
-<footer class="flex flex-col items-center bg-[#b2e7ff] text-center text-surface">
+<footer class="flex flex-col items-center bg-[#b2e7ff] text-center text-surface ">
     {{-- <div class="container p-6">
         <div class="grid gap-4 md:grid-cols-3 lg:grid-cols-6">
             @foreach ($spaces as $space )

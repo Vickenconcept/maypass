@@ -49,4 +49,16 @@ class User extends Authenticatable
     {
         return $this->hasMany(Booking::class);
     }
+
+    public function spaces()
+    {
+        return $this->belongsToMany(Space::class, 'user_space');
+    }
+
+    public function activeWorkspaces()
+    {
+        return $this->spaces()->whereHas('bookings', function ($query) {
+            $query->where('status', 'confirmed'); 
+        });
+    }
 }

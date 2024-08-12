@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PinController;
@@ -14,10 +15,9 @@ use App\Http\Controllers\UserSpaceController;
 use App\Models\Space;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    $spaces = Space::where('is_available', true)->latest()->get()->shuffle();
-    return view('home', compact('spaces'));
-})->name('home');
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
 
 
 Route::middleware('guest')->group(function () {
@@ -32,10 +32,11 @@ Route::middleware('guest')->group(function () {
     });
 });
 
+
 Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    // Route::get('/dashboard', function () {
+    //     return view('dashboard');
+    // })->name('dashboard');
 
     Route::get('/notifications/mark-as-read', function () {
         auth()->user()->unreadNotifications->markAsRead();
@@ -55,6 +56,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('my-spaces', [UserSpaceController::class, 'index'])->name('my.space.index');
     Route::get('/my-spaces/{space}', [UserSpaceController::class, 'show'])->name('my.space.show');
+    Route::post('/workspace/{workspace}/add-user', [UserSpaceController::class, 'addUserToWorkspace'])
+        ->name('workspace.add-user')
+        ->middleware('auth');
     Route::post('auth/logout', [AuthController::class, 'logout'])->name('auth.logout');
 });
 
