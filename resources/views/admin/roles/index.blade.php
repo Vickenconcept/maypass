@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="container mx-auto px-4 ">
+    <div class="container mx-auto px-4">
         <div class="flex justify-between items-center mb-4 border-y  border-gray-500 py-2 ">
             <h1 class="text-2xl font-bold mb-4">Manage Roles and Permissions</h1>
             <a href="{{ route('roles.create') }}" class="btn-primary">Create Role</a>

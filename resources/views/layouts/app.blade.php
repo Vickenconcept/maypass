@@ -40,7 +40,7 @@
         <x-notification />
         <x-session-msg />
         {{-- <x-pre-loader /> --}}
-        <div class="  sm:ml-64  px-3 md:px-10  pb-10 mt-16 pt-10">
+        <div class="  sm:ml-64  px-3 md:px-10  pb-10 mt-16 pt-10 h-screen overflow-y-auto">
             {{ $slot }}
         </div>
         <div class="sm:ml-64 ">

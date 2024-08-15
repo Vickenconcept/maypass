@@ -102,25 +102,24 @@
                                     class="w-full bg-[#b30000] bg-opacity-10 group-hover:text-white  h-full relative -translate-x-full group-hover:translate-x-0 transition-all duration-700">
                                     <div class=" z-10  h-full flex items-center justify-center">
                                         <div class="text-center">
-                                            {{-- <p class="text-md font-bold capitalize">{{ $space->name }}</p> --}}
-                                            <p class="text-md font-bold capitalize">
+                                            {{-- <p class="text-md font-bold capitalize">
                                                 <a href="{{ route('my.space.show', $space->id) }}"
                                                     class=" btn-primary2">
                                                     <span>View Space</span>
                                                     <i class='bx bx-show-alt mt-1'></i>
                                                 </a>
-                                            </p>
+                                            </p> --}}
                                         </div>
 
                                     </div>
                                 </div>
                             </div>
-                            <div class="mt-3">
+                            {{-- <div class="mt-3">
                                 <a href="{{ route('my.space.show', $space->id) }}"
                                     class="text-blue-500 hover:underline font-medium flex items-center space-x-1"><span>View
                                         Space</span> <i class='bx bx-show-alt mt-1'></i></a>
 
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 @endforeach

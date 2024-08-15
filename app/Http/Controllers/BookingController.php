@@ -38,7 +38,7 @@ class BookingController extends Controller
             $query->where('status', $status);
         }
 
-        $bookings = $query->latest()->paginate(10);
+        $bookings = $query->latest()->paginate(6);
 
         return view('admin.bookings.index', compact('bookings'));
     }
@@ -75,7 +75,7 @@ class BookingController extends Controller
                 $space->is_available = false;
                 $space->update();
 
-                
+
                 DB::table('user_space')->insert([
                     'user_id' => auth()->id(),
                     'space_id' => $space->id,

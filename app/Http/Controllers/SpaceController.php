@@ -35,7 +35,7 @@ class SpaceController extends Controller
         }
 
 
-        $spaces = $query->latest()->paginate(10);
+        $spaces = $query->latest()->paginate(6);
         return view('admin.spaces.index', compact('spaces'));
     }
 
