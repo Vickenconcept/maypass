@@ -20,12 +20,15 @@
 
 </head>
 
-<body class="h-full">
+<body class="h-full ">
     <x-navbar />
     <x-notification />
     <x-session-msg />
     {{ $slot }}
-    <x-footer />
+    <div class="pt-16">
+        <x-footer />
+
+    </div>
 
 </body>
 
