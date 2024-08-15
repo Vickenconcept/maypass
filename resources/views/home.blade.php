@@ -68,7 +68,14 @@
                     <h2 class="text-lg font-bold mt-2 capitalize">{{ $space->name }}</h2>
                     <p class="text-gray-600 truncate line-clamp-1 capitalize">{{ $space->description }}</p>
                     <p class="text-gray-800 font-bold mt-2 mb-5">${{ $space->price_per_day }}/day</p>
-                    <a href="{{ route('bookings.book', $space->id) }}" class=" btn-primary">Book Now</a>
+                    <div class="flex justify-between">
+                        <div>
+                            <a href="{{ route('bookings.book', $space->id) }}" class="btn-primary">Book Now</a>
+                        </div>
+                        <div>
+                            <span class="px-2 py-1 text-xs rounded-xl bg-slate-300">{{ $space->category->name }}</span>
+                        </div>
+                    </div>
                 </div>
             @empty
                 <div class="md:col-span-2 lg:col-span-3 bg-white rounded-lg shadow px-5 pt-5 pb-10  w-[50%] mx-auto">
